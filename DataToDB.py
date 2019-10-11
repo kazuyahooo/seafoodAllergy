@@ -19,8 +19,11 @@ def insert_data(event):
 
 @app.route('/', methods=['GET'])
 def home():
-    return render_template("elements.html")
+    return render_template("index.html")
 
+@app.route('/elements.html')
+def element():
+    return render_template("elements.html")
 @app.route('/complete', methods=['GET'])
 def complete():
     activity_data = request.values.to_dict()

@@ -47,12 +47,12 @@
 
 					<!-- Content -->
 						<h2 id="content">活動名稱</h2>
-						<form >					
-						<input type="text" name="eventName" id="eventName" placeholder="請輸入活動名稱">
-						</form>
+						<form method="get" action=" http://127.0.0.1:5000/complete">					
+						<p><input type="text" name="eventName" id="eventName" placeholder="請輸入活動名稱" autofocus></p>
+						
 						<h2 id="content">活動日期</h2>
-						<p>開始時間:<input name="eventM" id="content" type="datetime-local" style="text-align:justify;min=2019/01/01;"/></p>
-						<P>結束時間:<input name="eventM" id="content" type="datetime-local" style="text-align:justify;min=2019/01/01;"/></p>
+						<p>開始時間:<input name="eventM_B" id="content" type="datetime-local" style="text-align:justify;min=2019/01/01;"></p>
+						<P>結束時間:<input name="eventM_F" id="content" type="datetime-local" style="text-align:justify;min=2019/01/01;"></p>
 						<!--test--
 						<form>
 						<div align="left" >
@@ -111,13 +111,13 @@
 						</form>
 						-->
 						<h2 id="content">活動地點</h2>
-						<form>
-						<input type="text" name="eventLocation" placeholder="請輸入活動詳細地址、位置">
-						</form>
+						
+						<p><input type="text" name="eventLocation" placeholder="請輸入活動詳細地址、位置" ></p>
+
 						<h2 id="content">活動詳情、說明</h2>
-						<form>
-						<textarea name="eventDetail" id="eventDetail" placeholder="請輸入活動相關詳細資訊、說明" rows="10"></textarea>
-						</form>
+						
+						<textarea name="eventDetail" id="eventDetail" placeholder="請輸入活動相關詳細資訊、說明" rows="10" ></textarea>
+						
 						<!--div class="row">
 							<div class="6u 12u$(small)">
 								<h3>Sem turpis amet semper</h3>
@@ -417,7 +417,7 @@
 								<!-- Form -->
 									<h1>活動聯絡人資訊</h1>
 									
-									<form method="post" action="#">
+									
 										<div class="row uniform">
 											<div class="6u 12u$(xsmall)">
 												<input type="text" name="name_" id="name_" value="" placeholder="姓名" />
