@@ -10,6 +10,9 @@ app = flask.Flask(__name__)
 app.config["DEBUG"] = True
 app.config["JSON_AS_ASCII"] = False
 
+app.jinja_env.auto_reload = True
+app.config['TEMPLATES_AUTO_RELOAD'] = True
+
 def insert_data(event):
     if col.find_one({"eventName":event["eventName"]}) is None:
         col.insert_one(event)
@@ -24,11 +27,14 @@ def home():
 @app.route('/elements.html')
 def element():
     return render_template("elements.html")
+
 @app.route('/complete', methods=['GET'])
 def complete():
+    #activity_data是使用者輸入表單的資料    
     activity_data = request.values.to_dict()
     insert_data(activity_data)
-    return 'Hello'+request.values['eventName'] 
+    
+    return render_template('postYourActivity.html',title='MyActivity', activity=activity_data)
 
 
 app.run()
