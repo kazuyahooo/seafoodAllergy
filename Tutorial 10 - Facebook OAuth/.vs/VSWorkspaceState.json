@@ -1,0 +1,16 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\app",
+    "\\app\\models",
+    "\\config",
+    "\\views",
+    "\\views\\fonts\\font-awesome-4.7.0",
+    "\\views\\fonts\\font-awesome-4.7.0\\css",
+    "\\views\\vendor\\jquery",
+    "\\views\\vendor\\perfect-scrollbar",
+    "\\views\\vendor\\select2"
+  ],
+  "SelectedNode": "\\views\\signup.ejs",
+  "PreviewInSolutionExplorer": false
+}
