@@ -21,8 +21,25 @@ def insert_data(event):
         print(col.find_one({"eventName":event["eventName"]}))
 
 @app.route('/', methods=['GET'])
+@app.route('/index.html', methods=['GET'])
 def home():
-    return render_template("index.html")
+    temp_events=list()
+    event={
+       "http":"http://www.accupass.com/event/1904040739571150361040",
+       "img":"static/images/pic01.jpg"
+       }
+    temp_events.append(event)
+    event={
+           "http":"http://www.accupass.com/event/1909140357534178828000",
+           "img":"static/images/pic02.png"
+           }
+    temp_events.append(event)
+    event={
+           "http":"http://www.accupass.com/event/1901271544488531904750",
+           "img":"static/images/pic03.png"
+           }
+    temp_events.append(event)
+    return render_template("index.html",event = temp_events)
 
 @app.route('/elements.html')
 def element():
@@ -35,6 +52,8 @@ def complete():
     insert_data(activity_data)
     
     return render_template('postYourActivity.html',title='MyActivity', activity=activity_data)
+
+
 
 
 app.run()
