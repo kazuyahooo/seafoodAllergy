@@ -16,10 +16,10 @@
 		<!-- Header -->
 			<header id="header">
 				<nav class="left">
-					<a href="#menu"><span>Menu</span></a>
+					<a href="#menu"><span>Menu</span></a>	
 				</nav>
 				<a href="index.html" class="logo">建立活動</a>
-				
+				<li><nav class="right" ><a href="#" class="button alt">登入</a></nav></li>
 				</nav>
 			</header>
 
@@ -30,10 +30,6 @@
 					<li><a href="generic.html">搜尋活動</a></li>
 					<li><a href="elements.html">建立活動</a></li>
 					<li><a href="local.html">在地商家</a></li>
-					<li><nav class="right" ><a href="#" class="button alt">Log in</a></nav></li>
-				</ul>
-				<ul class="actions vertical">
-					<li><a href="#" class="button fit">Login</a></li>
 				</ul>
 			</nav>
 
@@ -46,78 +42,40 @@
 					</header>
 
 					<!-- Content -->
-						<h2 id="content">活動名稱</h2>
-						<form method="get" action=" http://127.0.0.1:5000/complete">					
-						<p><input type="text" name="eventName" id="eventName" placeholder="請輸入活動名稱" autofocus></p>
+					<h2 id="content">活動名稱</h2>
+						<form >					
+						<p>
+							<label> 活動名稱:
+								<input type="text" name="eventName" id="eventName" placeholder="請輸入活動名稱" autofocus>
+							</label>
+						</p>
 						
 						<h2 id="content">活動日期</h2>
-						<p>開始時間:<input name="eventM_B" id="content" type="datetime-local" style="text-align:justify;min=2019/01/01;"></p>
-						<P>結束時間:<input name="eventM_F" id="content" type="datetime-local" style="text-align:justify;min=2019/01/01;"></p>
-						<!--test--
-						<form>
-						<div align="left" >
-						<select name="eventY" id="eventY" style="width:33%;" >
-　							<option value="2019">2019</option>
-　							<option value="2020">2020</option>
-						</select>
-						<select name="eventM" id="eventM" style="width:33%;" >
-　							<option value="JAN">1月</option>
-　							<option value="FEB">2月</option>
-							<option value="MAR">3月</option>
-							<option value="APR">4月</option>
-							<option value="MAY">5月</option>
-							<option value="JUN">6月</option>
-							<option value="JUL">7月</option>
-							<option value="AUG">8月</option>
-							<option value="SEP">9月</option>
-							<option value="OCT">10月</option>
-							<option value="NOV">11月</option>
-							<option value="DEC">12月</option>
-						</select>	
-						<select name="eventD" id="eventD" type="date" style="width:33%;" >
-　							<option value="1">1日</option>
-　							<option value="2">2日</option>
-							<option value="3">3日</option>
-							<option value="4">4日</option>
-							<option value="5">5日</option>
-							<option value="6">6日</option>
-							<option value="7">7日</option>
-							<option value="8">8日</option>
-							<option value="9">9日</option>
-							<option value="10">10日</option>
-							<option value="11">11日</option>
-							<option value="12">12日</option>
-							<option value="13">13日</option>
-　							<option value="14">14日</option>
-							<option value="15">15日</option>
-							<option value="16">16日</option>
-							<option value="17">17日</option>
-							<option value="18">18日</option>
-							<option value="19">19日</option>
-							<option value="20">20日</option>
-							<option value="21">21日</option>
-							<option value="22">22日</option>
-							<option value="23">23日</option>
-							<option value="24">24日</option>
-							<option value="25">25日</option>
-							<option value="26">26日</option>
-							<option value="27">27日</option>
-							<option value="28">28日</option>
-							<option value="29">29日</option>
-							<option value="30">30日</option>
-							<option value="31">31日</option>
-						</select>
-						</div>
-						</form>
-						-->
+						<p><label> 開始時間:<input name="eventM_B" id="content" type="datetime-local" style="text-align:justify;min=2019/01/01;"></label></p>
+						<p><label> 結束時間:<input name="eventM_F" id="content" type="datetime-local" style="text-align:justify;min=2019/01/01;"></label></p>
+						
 						<h2 id="content">活動地點</h2>
 						
-						<p><input type="text" name="eventLocation" placeholder="請輸入活動詳細地址、位置" ></p>
+						<p>
+							<label> 活動地點:
+								<input type="text" name="eventLocation" placeholder="請輸入活動詳細地址、位置" >
+							</label>
+						</p>
 
 						<h2 id="content">活動詳情、說明</h2>
 						
-						<textarea name="eventDetail" id="eventDetail" placeholder="請輸入活動相關詳細資訊、說明" rows="10" ></textarea>
-						
+						<label> 活動詳情、說明:
+							<textarea name="eventDetail" id="eventDetail" placeholder="請輸入活動相關詳細資訊、說明" rows="10" ></textarea>
+						</label>
+
+						<h2 id="content">活動規劃進度</h2>
+
+							<div><input type="radio" id="Y" name="eventReady" value="Y" checked="true" >
+							<label for="Y" style="font-size: 23px;">已籌畫完成</label>
+							<input type="radio" id="N" name="eventReady" value="N" >
+							<label for="N" style="font-size: 23px;">我仍在籌畫</label></div>
+
+
 						<!--div class="row">
 							<div class="6u 12u$(small)">
 								<h3>Sem turpis amet semper</h3>
