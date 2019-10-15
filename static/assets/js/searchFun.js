@@ -1,4 +1,4 @@
-var searchResult = [{_id: "g",eventName:"g",eventM_B:"g",eventB_M:"g",eventLocation: "g",eventDetail:　"g",name_: "g",email_: "g",phonenum_: "g",addres_: "g",remark: "g"}];
+var searchResult;
 var postType = ["byName","byLocation","byType"];
 var postReg;
 function setResult()
@@ -27,7 +27,7 @@ function setResult()
 
 
 function searchRequest(){
-	searchRequest = $.post("http://127.0.0.1:5000",{type : postType[postReg] , data : $('#eventName').value},setResult());
+	searchRequest = $.post("http://127.0.0.1:5000/searchcomplete",{"type" : postType[postReg] , "data" : $('#eventName').value},setResult(),"json");
 }
 
 function createSearchBarNode()
