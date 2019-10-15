@@ -1,18 +1,68 @@
 import flask
-from flask import render_template, request, jsonify
+from flask import render_template, request, jsonify, redirect
+from flask_security import Security, MongoEngineUserDatastore, UserMixin, RoleMixin, login_required, current_user, roles_accepted
 from pymongo import MongoClient
+from flask_mongoengine import MongoEngine
+
+
+app = flask.Flask(__name__)
+app.config["DEBUG"] = True
+app.config["JSON_AS_ASCII"] = False
+app.config["MONGODB_HOST"] = "mongodb+srv://Liao:871029@cluster0-sk2jk.mongodb.net/flaskTest"
+app.config["MONGODB_DB"] = True
+app.config['SECRET_KEY'] = 'super-secret'
+app.config['SECURITY_PASSWORD_SALT'] = 'bcrypt'
+app.jinja_env.auto_reload = True
+app.config['TEMPLATES_AUTO_RELOAD'] = True
 
 client = MongoClient('mongodb+srv://Liao:871029@cluster0-sk2jk.mongodb.net')
 db = client['EventResourse']
 col = db['Event']
 
-app = flask.Flask(__name__)
-app.config["DEBUG"] = True
-app.config["JSON_AS_ASCII"] = False
+db = MongoEngine(app)
 
-app.jinja_env.auto_reload = True
-app.config['TEMPLATES_AUTO_RELOAD'] = True
 
+# 不同種權限身份
+class Role(db.Document, RoleMixin):
+    name = db.StringField(max_length=80, unique=True)
+    description = db.StringField(max_length=255)
+
+# 使用者資訊
+class User(db.Document, UserMixin):
+    email = db.StringField(max_length=255)
+    password = db.StringField(max_length=255)
+    active = db.BooleanField(default=True)
+    confirmed_at = db.DateTimeField()
+    roles = db.ListField(db.ReferenceField(Role), default=[])
+    
+user_datastore = MongoEngineUserDatastore(db, User, Role)
+security = Security(app, user_datastore)
+
+#沒有權限導引畫面
+def unauthorized_callback():
+	return '沒有權限'
+
+# 設定未授權時轉跳畫面
+security._state.unauthorized_handler(unauthorized_callback)
+
+@app.before_first_request
+def create_user():
+    user_role = user_datastore.find_or_create_role('user')
+    if user_datastore.get_user('user') == None:
+        user_datastore.create_user(
+            email='user', password='user', roles=[user_role]
+        )
+    admin_role = user_datastore.find_or_create_role('admin')
+    if user_datastore.get_user('root') == None:
+        user_datastore.create_user(
+            email='root', password='root', roles=[admin_role]
+        )
+    guest_role = user_datastore.find_or_create_role('guest')
+    if user_datastore.get_user('guest') == None:
+        user_datastore.create_user(
+            email='guest', password='guest', roles=[guest_role]
+        )
+        
 def insert_data(event):
     if col.find_one({"eventName":event["eventName"]}) is None:
         col.insert_one(event)
@@ -20,7 +70,12 @@ def insert_data(event):
     else:
         print(col.find_one({"eventName":event["eventName"]}))
 
-@app.route('/', methods=['GET'])
+@app.route('/')
+@login_required
+@roles_accepted('guest')
+def login():
+    return redirect('index.html')
+
 @app.route('/index.html', methods=['GET'])
 def home():
     temp_events=list()
@@ -72,4 +127,6 @@ def searchEvent():
 #    eventsRS = col.find_one({"eventName":searchEventName})
 #    print(eventsRS)
     return '123'
+
+
 app.run()
