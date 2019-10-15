@@ -1,7 +1,7 @@
-var searchResult;
+//var searchResult;
 var postType = ["byName","byLocation","byType"];
 var postReg;
-function setResult()
+function setResult(searchResult)
 {
 	$('#three').empty();
 	var popContent = '<h1 align="center"><搜尋結果></h1>';
@@ -27,7 +27,15 @@ function setResult()
 
 
 function searchRequest(){
-	searchRequest = $.post("http://127.0.0.1:5000/searchcomplete",{"type" : postType[postReg] , "data" : $('#eventName').value},setResult(),"json");
+	$.ajax({
+		type: 'POST',
+		urlS: "http://127.0.0.1:5000/searchcomplete",
+		data: {"type" : "ggg" , "data" : "goal"},
+		dataType: 'json',
+		success: setResult
+	});
+	
+	//searchRequest = $.post("http://127.0.0.1:5000/searchcomplete",{"type" : postType[postReg] , "data" : $('#eventName').value},setResult(),"json");
 }
 
 function createSearchBarNode()
