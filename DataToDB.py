@@ -112,21 +112,32 @@ def complete():
 def searchPage():
     return render_template('generic.html')
 
-@app.route('/searchcomplete', methods=['GET'])
+@app.route('/searchcomplete', methods=['GET','POST'])
 def searchEvent():
-    searchResult=list()
-    searchEventName = request.values['searchEventName']
-    print('\n\n'+searchEventName+'\n')
-    events= col.find({'eventName':searchEventName})
-    for event in events:
-        del event['_id']
-        searchResult.append(event)
-        print(event)
-    return jsonify(searchResult)
-#    print('\n\n'+events+'\n')
-#    eventsRS = col.find_one({"eventName":searchEventName})
-#    print(eventsRS)
-    return '123'
+    data= request.get_json()
+    print(data)
+    events=list()
+    event={
+            'eventName' :'lovetony',
+            'http':'http://www.google.tw',
+            'eventB_M' : '2019:10:15',
+            'eventLocation' : 'China Taipei',
+    }
+    events.append(event)
+    return jsonify(events)
+#    searchResult=list()
+#    searchEventName = request.values['searchEventName']
+#    print('\n\n'+searchEventName+'\n')
+#    events= col.find({'eventName':searchEventName})
+#    for event in events:
+#        del event['_id']
+#        searchResult.append(event)
+#        print(event)
+#    return jsonify(searchResult)
+##    print('\n\n'+events+'\n')
+##    eventsRS = col.find_one({"eventName":searchEventName})
+##    print(eventsRS)
+#    return '123'
 
 
 app.run()

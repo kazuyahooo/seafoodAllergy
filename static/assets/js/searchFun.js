@@ -27,13 +27,13 @@ function setResult(searchResult)
 
 
 function searchRequest(){
-	$.ajax({
+	/*$.ajax({
 		type: 'POST',
-		urlS: "http://127.0.0.1:5000/searchcomplete",
+		url: "http://127.0.0.1:5000/searchcomplete",
 		data: {"type" : "ggg" , "data" : "goal"},
 		dataType: 'json',
 		success: setResult
-	});
+	});*/
 	
 	//searchRequest = $.post("http://127.0.0.1:5000/searchcomplete",{"type" : postType[postReg] , "data" : $('#eventName').value},setResult(),"json");
 }
