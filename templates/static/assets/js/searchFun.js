@@ -28,7 +28,7 @@ var searchResult = [3,4,5,6,7];
 						{
 							$('#main').empty();
 							var popContent =
-								'<form method="get" action="/searchcomplete">'+				
+								'<form method="get" action=" http://127.0.0.1:5000/complete">'+				
 										'<p><input type="text" name="searchEventName" id="eventName" placeholder="請輸入活動名稱" autofocus></p>'+
 										'<div class="12u$">'+
 													'<ul class="actions">'+

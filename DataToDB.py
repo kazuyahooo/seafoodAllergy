@@ -1,5 +1,5 @@
 import flask
-from flask import render_template, request
+from flask import render_template, request, jsonify
 from pymongo import MongoClient
 
 client = MongoClient('mongodb+srv://Liao:871029@cluster0-sk2jk.mongodb.net')
@@ -50,10 +50,26 @@ def complete():
     #activity_data是使用者輸入表單的資料    
     activity_data = request.values.to_dict()
     insert_data(activity_data)
-    
+    print(activity_data)
     return render_template('postYourActivity.html',title='MyActivity', activity=activity_data)
 
+@app.route('/search', methods=['GET'])
+def searchPage():
+    return render_template('generic.html')
 
-
-
+@app.route('/searchcomplete', methods=['GET'])
+def searchEvent():
+    searchResult=list()
+    searchEventName = request.values['searchEventName']
+    print('\n\n'+searchEventName+'\n')
+    events= col.find({'eventName':searchEventName})
+    for event in events:
+        del event['_id']
+        searchResult.append(event)
+        print(event)
+    return jsonify(searchResult)
+#    print('\n\n'+events+'\n')
+#    eventsRS = col.find_one({"eventName":searchEventName})
+#    print(eventsRS)
+    return '123'
 app.run()
