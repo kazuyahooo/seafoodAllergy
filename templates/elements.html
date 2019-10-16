@@ -18,8 +18,8 @@
 				<nav class="left">
 					<a href="#menu"><span>Menu</span></a>	
 				</nav>
-				<a href="index.html" class="logo">建立活動</a>
-				<li><nav class="right" ><a href="#" class="button alt">登入</a></nav></li>
+				<a href="elements.html" class="logo">建立活動</a>
+				<nav class="right" ><a href="#" class="button alt">登入</a></nav>
 				</nav>
 			</header>
 
@@ -46,59 +46,44 @@
 						<form >					
 						<p>
 							<label> 活動名稱:
-								<input type="text" name="eventName" id="eventName" placeholder="請輸入活動名稱" autofocus>
+								<input type="text" name="eventName" id="eventName" placeholder="請輸入活動名稱" autofocus required="required">
 							</label>
 						</p>
 						
 						<h2 id="content">活動日期</h2>
-						<p><label> 開始時間:<input name="eventM_B" id="content" type="datetime-local" style="text-align:justify;min=2019/01/01;"></label></p>
-						<p><label> 結束時間:<input name="eventM_F" id="content" type="datetime-local" style="text-align:justify;min=2019/01/01;"></label></p>
+						<script>
+							var RightNow = new Date();
+							//var rightNow = document.querySelector('input[type="datetime-local"]');
+							//document.getElementById("rightNow").value=RightNow.getFullYear() + "-"+(RightNow.getMonth()+1)+ "-" + RightNow.getDate() + "-T" + RightNow.getHours() + ":" + RightNow.getMinutes();
+							$(document).hover(function(){
+							$("#eventM").val(RightNow.getFullYear() + "-"+(RightNow.getMonth()+1)+ "-" + RightNow.getDate() + "T" + RightNow.getHours() + ":" + RightNow.getMinutes());});
+						</script>
+
+						<p><label> 開始時間:<input name="eventM_B" id="eventM" type="datetime-local"  style="text-align:;"min="2019/01/01" required="required" value=""></label></p>
+						<p><label> 結束時間:<input name="eventM_F" id="eventM_s" type="datetime-local" style="text-align:justify;"min="2019/01/01"; required="required"></label></p>
 						
 						<h2 id="content">活動地點</h2>
 						
 						<p>
 							<label> 活動地點:
-								<input type="text" name="eventLocation" placeholder="請輸入活動詳細地址、位置" >
+								<input type="text" name="eventLocation" placeholder="請輸入活動詳細地址、位置" required="required">
 							</label>
 						</p>
 
 						<h2 id="content">活動詳情、說明</h2>
 						
 						<label> 活動詳情、說明:
-							<textarea name="eventDetail" id="eventDetail" placeholder="請輸入活動相關詳細資訊、說明" rows="10" ></textarea>
+							<textarea name="eventDetail" id="eventDetail" placeholder="請輸入活動相關詳細資訊、說明" rows="10" required="required"></textarea>
 						</label>
 
 						<h2 id="content">活動規劃進度</h2>
 
-							<div><input type="radio" id="Y" name="eventReady" value="Y" checked="true" >
-							<label for="Y" style="font-size: 23px;">已籌畫完成</label>
-							<input type="radio" id="N" name="eventReady" value="N" >
-							<label for="N" style="font-size: 23px;">我仍在籌畫</label></div>
-
-
-						<!--div class="row">
-							<div class="6u 12u$(small)">
-								<h3>Sem turpis amet semper</h3>
-								<p>Nunc lacinia ante nunc ac lobortis. Interdum adipiscing gravida odio porttitor sem non mi integer non faucibus ornare mi ut ante amet placerat aliquet. Volutpat commodo eu sed ante lacinia. Sapien a lorem in integer ornare praesent commodo adipiscing arcu in massa commodo lorem accumsan at odio massa ac ac. Semper adipiscing varius montes viverra nibh in adipiscing blandit tempus accumsan.</p>
+							<div>
+								<input type="radio" id="Y" name="eventReady" value="Y" checked="true" >
+								<label for="Y" style="font-size: 23px;">已籌畫完成</label>
+								<input type="radio" id="N" name="eventReady" value="N" >
+								<label for="N" style="font-size: 23px;">我仍在籌畫</label>
 							</div>
-							<div class="6u$ 12u$(small)">
-								<h3>Magna odio tempus commodo</h3>
-								<p>In arcu accumsan arcu adipiscing accumsan orci ac. Felis id enim aliquet. Accumsan ac integer lobortis commodo ornare aliquet accumsan erat tempus amet porttitor. Ante commodo blandit adipiscing integer semper orci eget. Faucibus commodo adipiscing mi eu nullam accumsan morbi arcu ornare odio mi adipiscing nascetur lacus ac interdum morbi accumsan vis mi accumsan ac praesent.</p>
-							</div>-->
-							<!-- Break -->
-							<!--<div class="4u 12u$(medium)">
-								<h3>Interdum sapien gravida</h3>
-								<p>Nunc lacinia ante nunc ac lobortis. Interdum adipiscing gravida odio porttitor sem non mi integer non faucibus ornare mi ut ante amet placerat aliquet. Volutpat eu sed ante lacinia sapien lorem accumsan varius montes viverra nibh in adipiscing blandit tempus accumsan.</p>
-							</div>
-							<div class="4u 12u$(medium)">
-								<h3>Faucibus consequat lorem</h3>
-								<p>Nunc lacinia ante nunc ac lobortis. Interdum adipiscing gravida odio porttitor sem non mi integer non faucibus ornare mi ut ante amet placerat aliquet. Volutpat eu sed ante lacinia sapien lorem accumsan varius montes viverra nibh in adipiscing blandit tempus accumsan.</p>
-							</div>
-							<div class="4u$ 12u$(medium)">
-								<h3>Accumsan montes viverra</h3>
-								<p>Nunc lacinia ante nunc ac lobortis. Interdum adipiscing gravida odio porttitor sem non mi integer non faucibus ornare mi ut ante amet placerat aliquet. Volutpat eu sed ante lacinia sapien lorem accumsan varius montes viverra nibh in adipiscing blandit tempus accumsan.</p>
-							</div>
-						</div>-->
 
 					<hr class="major" />
 
@@ -378,16 +363,16 @@
 									
 										<div class="row uniform">
 											<div class="6u 12u$(xsmall)">
-												<input type="text" name="name_" id="name_" value="" placeholder="姓名" />
+												<input type="text" name="name_" id="name_" value="" placeholder="姓名" required="required"/>
 											</div>
 											<div class="6u$ 12u$(xsmall)">
-												<input type="email" name="email_" id="email_" value="" placeholder="電子郵件 Email" />
+												<input type="email" name="email_" id="email_" value="" placeholder="電子郵件 Email" required="required"/>
 											</div>
 											<div class="6u 12u$(xsmall)">
-												<input type="text" name="phonenum_" id="phonenum_" placeholder="聯絡電話" />
+												<input type="text" name="phonenum_" id="phonenum_" placeholder="聯絡電話" required="required"/>
 											</div>
 											<div class="12u$">
-												<input type="text" name="address_" id="address_" placeholder="地址" />
+												<input type="text" name="address_" id="address_" placeholder="地址" required="required"/>
 											</div>
 
 										
@@ -415,7 +400,7 @@
 											</div>-->
 											<!-- Break -->
 											<div class="12u$">
-												<textarea name="remark" id="remark" placeholder="備註" rows="4"></textarea>
+												<textarea name="remark" id="remark" placeholder="備註" rows="4" required="required"></textarea>
 											</div>
 											<!-- Break -->
 											<div class="12u$">
