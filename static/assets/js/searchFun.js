@@ -27,15 +27,15 @@ function setResult(searchResult)
 
 
 function searchRequest(){
-	/*$.ajax({
+	$.ajax({
 		type: 'POST',
-		url: "http://127.0.0.1:5000/searchcomplete",
+		url: "http://140.121.199.231:27018/searchcomplete",
 		data: {"type" : "ggg" , "data" : "goal"},
 		dataType: 'json',
 		success: setResult
-	});*/
+	});
 	
-	//searchRequest = $.post("http://127.0.0.1:5000/searchcomplete",{"type" : postType[postReg] , "data" : $('#eventName').value},setResult(),"json");
+	//searchRequest = $.post("http://140.121.199.231:27018/searchcomplete",{"type" : postType[postReg] , "data" : $('#eventName').value},setResult(),"json");
 }
 
 function createSearchBarNode()
