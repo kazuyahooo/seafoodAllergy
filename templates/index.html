@@ -15,17 +15,19 @@
 					<a href="#menu"><span>Menu</span></a>
 				</nav>		
 				<a href="index.html" class="logo">SeafoodAllergy</a>
-				<nav class="right" ><a href="#" class="button alt">登入</a></nav>
+				<nav class="right" ><a href="login.html" class="button alt">登入</a></nav>
 			</header>
 
 		<!-- Menu -->
 			<nav id="menu">
 				<ul class="links">
 					<li><a href="index.html">主頁</a></li>
-					<li><a href="search">搜尋活動</a></li>
+					<li><a href="generic.html">搜尋活動</a></li>
 					<li><a href="elements.html">建立活動</a></li>
 					<li><a href="local.html">在地商家</a></li>
+					
 				</ul>
+
 			</nav>
 
 		<!-- Banner -->
@@ -41,13 +43,42 @@
 					</ul>
 				</div>
 			</section>
+
+		<!-- One 
+			<section id="one" class="wrapper">
+				<div class="inner flex flex-3">
+					<div class="flex-item left">
+						<div>
+							<h3>活動一</h3>
+							<p>簡介</p>
+						</div>
+						<div>
+							<h3>活動二</h3>
+							<p>簡介</p>
+						</div>
+					</div>
+					<div class="flex-item image fit round">
+						<img src="images/pic01.jpg" alt="" />
+					</div>
+					<div class="flex-item right">
+						<div>
+							<h3>活動三</h3>
+							<p>簡介</p>
+						</div>
+						<div>
+							<h3>活動四</h3>
+							<p>簡介</p>
+						</div>
+					</div>
+				</div>
+			</section>
 		<!-- Three -->
 			<section id="three" class="wrapper">
 				<h1 align="center"><最新活動></h1>
 				<div class="inner flex flex-3">
 					<div class="flex-item box"><a href={{event[0].http}} style="text-decoration:none;" target="_blank">
 						<div class="image fit">
-							<img src="static/images/pic01.png" alt="" />
+							<img src={{event[0].img}} alt="" />
 						</div>
 						<div class="content">
 							<h3>【潮一夏】 —探訪八斗子潮間帶生態</h3>
@@ -80,9 +111,9 @@
 				</div>		
 				<div align="center"><b><a href="generic.html" class="button fit" style="width:20%;font-size:23px;color:#25a2c3;background-color:rgba(37,162,195,0);text-decoration:none;">See more</a></b></div>
 			</section>	
-		
+	
 			<section id="main" class="wrapper style1 special">
-				<h1 style="align:center;font-size:50px;">公告欄</h1>
+				<h1 style="font-size:50px;">公告欄</h1>
 				<div class="inner" >
 					<ul class="bulletin_ul">
 						<li><a>
@@ -112,9 +143,11 @@
 								<div class="newDate">2019.09.21~2019.11.02</div></a>
 						</li>	
 					</ul>
+					<div align="center"><b><a href="#" style="text-align:center;width:20%;font-size:23px;color:#DAF5F5;text-decoration:none;"><br>SEE MORE</a></b></div>
 				</div>
 				
 			</section>
+
 
 		<!-- Footer -->
 			<footer id="footer">

@@ -30,8 +30,8 @@ function searchRequest(){
 	$.ajax({
 		type: 'POST',
 		url: "http://140.121.199.231:27018/searchcomplete",
-		data: {"type" : "ggg" , "data" : "goal"},
-		dataType: 'json',
+		data: {"type" : postType[postReg] , "data" : $('#eventName').val()},
+		contentType: 'application/json',
 		success: setResult
 	});
 	
@@ -43,10 +43,10 @@ function createSearchBarNode()
 		postReg = 0;
 		$('#main').empty();
 		var popContent =			
-					'<p><input type="text" name="searchEventName" id="eventName" placeholder="請輸入活動名稱" autofocus></p>'+
-					'<div class="12u$">'+
-								'<ul class="actions">'+
-									'<li><input type="submit" value="確認送出" / onclick="searchRequest()"></li>'+
+					'<div class="inner"><input type="text" name="searchEventName" id="eventName" placeholder="請輸入活動名稱" autofocus></div><br>'+
+					'<div class="inner">'+
+								'<ul class="actions" style="text-align:right;" >'+
+									'<li><input type="submit" value="確認送出" onclick="searchRequest()"/></li>'+
 									'<li><input type="reset" value="取消" class="alt" /></li>'+
 								'</ul></div>';
 

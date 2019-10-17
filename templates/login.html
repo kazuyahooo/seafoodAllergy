@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<style>
+    @import "bourbon";
+
+    body {
+        background: lightskyblue;
+    }
+
+    .wrapper {
+        margin-top: 80px;
+        margin-bottom: 80px;
+        color: navy;
+    }
+
+    .form-signin {
+        max-width: 380px;
+        padding: 15px 35px 45px;
+        margin: 0 auto;
+        background-color: #fff;
+        border: 1px solid rgba(0, 0, 0, 0.1);
+        text-align: center;
+        vertical-align: middle;
+        border-radius: 12px;
+    }
+
+    .form-signin-heading {
+        font-family: Microsoft JhengHei;
+    }
+
+    p {
+        font-family: Microsoft JhengHei;
+    }
+
+    .form-signin-heading,
+    .checkbox {
+
+        margin-bottom: 30px;
+        text-align: center;
+    }
+
+    .checkbox {
+        font-family: Tahoma;
+        font-weight: normal;
+        font-family: Microsoft JhengHei;
+    }
+
+    .form-control {
+        position: relative;
+        font-size: 16px;
+        padding: 10px;
+        text-align: center;
+        width: 250px;
+        height: 10px;
+
+    }
+
+    input[type="text"] {
+        margin-bottom: -1px;
+        border-bottom-left-radius: 0;
+        border-bottom-right-radius: 0;
+    }
+
+    input[type="password"] {
+        margin-bottom: 20px;
+        border-top-left-radius: 0;
+        border-top-right-radius: 0;
+    }
+
+    button.b {
+        font-family: Microsoft JhengHei;
+        background-color: #004466;
+        border: none;
+        color: white;
+        padding: 15px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 4px 2px;
+        cursor: pointer;
+        width: 250px;
+
+    }
+</style>
+
+<body>
+    <div class="wrapper">
+        <form class="form-signin">
+            <h1 class="form-signin-heading">登入</h1>
+            <p> 請輸入帳號或Email: </p>
+            <input type="text" class="form-control" name="username" placeholder="Email Address" required=""
+                autofocus="" /><br>
+            <p> 請輸入密碼: </p>
+            <input type="password" class="form-control" name="password" placeholder="Password" required="" /><br>
+            <label class="checkbox">
+                <input type="checkbox" value="remember-me" id="rememberMe" name="rememberMe"> 記住我
+            </label>
+            <br>
+            <br>
+            <button class='b' type="submit">Login</button> <br>
+            <p> 還沒有帳號嗎?</p>
+            <button class='b' type="submit">我要註冊</button>
+        </form>
+    </div>
+</body>
+
+</html>
