@@ -86,19 +86,28 @@
 
 <body>
     <div class="wrapper">
-        <form class="form-signin">
+        <form action="{{ url_for_security('login') }}" method="POST" name="login_form" class="form-signin">
             <h1 class="form-signin-heading">登入</h1>
-            <p> 請輸入帳號或Email: </p>
-            <input type="text" class="form-control" name="username" placeholder="Email Address" required=""
-                autofocus="" /><br>
-            <p> 請輸入密碼: </p>
-            <input type="password" class="form-control" name="password" placeholder="Password" required="" /><br>
-            <label class="checkbox">
+            <p> 請輸入帳號或Email: </p><br>
+            <!-- <input type="text" class="form-control" name="username" placeholder="Email Address" required=""
+                autofocus="" /><br> -->
+            {{ render_field_with_errors(login_form.email)(class='form-control', placeholder='Email Address')  }}
+            <p> 請輸入密碼: </p><br>
+            <!-- <input type="password" class="form-control" name="password" placeholder="Password" required="" /><br> -->
+            {{ render_field_with_errors(login_form.password)(class='form-control', placeholder='Password'') }}
+            <!-- <label class="checkbox">
                 <input type="checkbox" value="remember-me" id="rememberMe" name="rememberMe"> 記住我
-            </label>
+            </label> -->
+            <br>
+            <div >
+                <label class="checkbox">
+                    {{ login_user_form.remember }}
+                    {{ login_user_form.remember.label }}
+                </label>
             <br>
             <br>
-            <button class='b' type="submit">Login</button> <br>
+            <!-- <button class='b' type="submit">Login</button> <br> -->
+            {{ login_user_form.submit(class='b') }}
             <p> 還沒有帳號嗎?</p>
             <button class='b' type="submit">我要註冊</button>
         </form>
