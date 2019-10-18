@@ -1,10 +1,15 @@
 <!DOCTYPE html>
 <html>
+
+<head>
+<title>註冊</title>
 <style>
     @import "bourbon";
 
-    body {
-        background: lightskyblue;
+    body.register {
+        background: rgba(195,255,255,0.3);
+        background-color:rgba(195,255,255,0.3);
+        vertical-align: center;
     }
 
     .wrapper {
@@ -68,38 +73,39 @@
     }
 
     button.b {
-        font-family: Microsoft JhengHei;
-        background-color: #004466;
         border: none;
         color: white;
-        padding: 15px 32px;
         text-align: center;
         text-decoration: none;
         display: inline-block;
         font-size: 16px;
         margin: 4px 2px;
         cursor: pointer;
-        width: 250px;
+        width: 50%;
+        height: 55px;
 
     }
 </style>
-
-<body>
-    <div class="wrapper">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="static/assets/css/main.css" />
+</head>
+<body class="register">
+    <div class="inner">
         <form class="form-signin">
             <h1 class="form-signin-heading">我要註冊!</h1>
-            <p> 請輸入帳號或Email: </p>
+            <label>請輸入帳號或Email: 
             <input type="text" class="form-control" name="username" placeholder="Email Address" required=""
-                autofocus="" /><br>
-            <p> 請輸入密碼: </p>
-            <input type="password" class="form-control" name="password" placeholder="Password" required="" /><br>
-            <p> 請再次輸入密碼: </p>
-            <input type="password" class="form-control" name="passwordCheck" placeholder="Password" required="" /><br>
+                autofocus="" /></label>
+            <label>請輸入密碼: 
+            <input type="password" class="form-control" name="password" placeholder="Password" style="margin: 0px 0px 0px" required="" /></label>
+            <label>請再次輸入密碼: 
+            <input type="password" class="form-control" name="passwordCheck" placeholder="Password" required="" /></label>
             <label class="checkbox">
             </label>
-            <br>
-            <br>
-            <button class='b' type="submit">註冊</button> <br>
+            <button class='b' type="submit">註冊</button><br><br>
+            <b><a href="index.html" style="width:20%;font-size:15px;color:#727a82;background-color:rgba(0,0,0,0);text-decoration:none;" >返回主頁</a></b><br><br>
+            <b><a href="login.html" style="width:20%;font-size:15px;color:#727a82;background-color:rgba(0,0,0,0);text-decoration:none;" >返回登入</a></b>
         </form>
     </div>
 </body>
