@@ -88,6 +88,7 @@
     <div class="wrapper">
         <form action="{{ url_for_security('login') }}" method="POST" name="login_form" class="form-signin">
             <h1 class="form-signin-heading">登入</h1>
+            {{ login_form.hidden_tag() }}
             <p> 請輸入帳號或Email: </p><br>
             <!-- <input type="text" class="form-control" name="username" placeholder="Email Address" required=""
                 autofocus="" /><br> -->
