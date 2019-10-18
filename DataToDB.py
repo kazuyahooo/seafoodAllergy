@@ -71,10 +71,11 @@ def insert_data(event):
         print(col.find_one({"eventName":event["eventName"]}))
 
 @app.route('/')
-@login_required
-@roles_accepted('guest')
 def login():
-    return redirect('index.html')
+    if current_user.is_authenticated:
+        return redirect('index.html')
+    return render_template('login.html')
+    
 
 @app.route('/index.html', methods=['GET'])
 def home():
