@@ -49,19 +49,19 @@
 						<form method=["POST"] action="/complete" enctype="multipart/form-data">					
 						<p>
 							<label> 活動名稱:
-								<h1>{{activity.eventName}}!</h1>
+								<h1>{{activity.eventName}}</h1>
 							</label>
 						</p>
 						<h2 id="content">封面宣傳照</h2>
-						<input type="file" id="event_photo" name="event_photo" accept="image/jpg, image/jpeg, image/png"><br>
-						<img id="event_img" style="width:438px;height:219px;" src="static/images/ex_pic.jpg"  />
+						<span id="eventPhoto" onclick="createPhoto()"></span>
+		
 						<h2 id="content">活動日期</h2>
-						<p><label> 開始時間:<h1>{{activity.eventM_B}}!</h1></label></p>
-						<p><label> 結束時間:<h1>{{activity.eventM_F}}!</h1></label></p>
+						<p><label> 開始時間:<h1>{{activity.eventM_B}}</h1></label></p>
+						<p><label> 結束時間:<h1>{{activity.eventM_F}}</h1></label></p>
 						
 						<h2 id="content">活動地點</h2>
-						<p><label> 活動地點:<h1>{{activity.eventM_F}}!</h1></label></p>
-						<iframe width='100%' height='200' frameborder='0' scrolling='no' marginheight='0' marginwidth='0' src='https://maps.google.com.tw/maps?f=q&hl=zh-TW&geocode=&q=台北市&z=16&output=embed&t='></iframe>
+						<p><label> 活動地點:<h1>{{activity.eventLocation}}</h1></label></p>
+						<span id="googleMap" onclick="createGoogleMap()"></span>
 
 						<h2 id="content">活動分類</h2>
 						<p><label> 請勾選活動分類(可複選,至少一項)
@@ -109,7 +109,7 @@
 
 						<h2 id="content">活動詳情、說明</h2>
 						
-						<label> 活動詳情、說明:<h1>{{activity.eventDetail}}!</h1></label>
+						<label> 活動詳情、說明:<h1>{{activity.eventDetail}}</h1></label>
 
 						<h2 id="content">活動規劃進度</h2>
 							<!-- <div>
@@ -122,17 +122,17 @@
 									<h1>{{activity.eventReady}}!</h1>
 							</div>
  -->
-							<div id="nec_hid" style="display: none"> <label >籌備所需<h1>{{activity.necessary}}!</h1></label></div>
+							<div id="nec_hid" style="display: none"> <label >籌備所需<h1>{{activity.necessary}}</h1></label></div>
 					<hr class="major" />
 
 						<!-- Form -->
 							<h1>活動聯絡人資訊</h1>
 								<div class="row uniform">
-									<div class="6u 12u$(xsmall)"><h1>{{activity.name}}!</h1></div>
-									<div class="6u$ 12u$(xsmall)"><h1>{{activity.email}}!</h1></div>
-									<div class="6u 12u$(xsmall)"><h1>{{activity.phonenum_}}!</h1></div>
-									<div class="12u$"><h1>{{activity.address_}}!</h1></div>
-									<div class="12u$"><h1>{{activity.remark}}!</h1></div>
+									<div class="6u 12u$(xsmall)"><h1>{{activity.name}}</h1></div>
+									<div class="6u$ 12u$(xsmall)"><h1>{{activity.email}}</h1></div>
+									<div class="6u 12u$(xsmall)"><h1>{{activity.phonenum_}}</h1></div>
+									<div class="12u$"><h1>{{activity.address_}}</h1></div>
+									<div class="12u$"><h1>{{activity.remark}}</h1></div>
 								</div>
 						</form>
 					<hr/>
@@ -154,10 +154,29 @@
 
 		<!-- Scripts -->
 		<script src="static/assets/js/jquery.min.js"></script>
+		<script>
+			function searchPhoto(){
+			$('#eventPhoto').empty();
+			var popContent =			
+				"<img src='static/images/"+
+				activity.eventName+
+				".jpg'>";
+				$('#eventPhoto').append(popContent);
+			}
+			
+			function searchGoogleMap(){
+			$('#googleMap').empty();
+			var popContent =			
+				"<iframe id='googleMap' width='100%' height='200' frameborder='0' scrolling='no' marginheight='0' marginwidth='0' src='https://maps.google.com.tw/maps?f=q&hl=zh-TW&geocode=&q="+
+				activity.eventLocation+
+				"&z=16&output=embed&t='></iframe>";
+				$('#googleMap').append(popContent);
+			}
+			
+		</script>
 		<script src="static/assets/js/jquery.scrolly.min.js"></script>
 		<script src="static/assets/js/skel.min.js"></script>
 		<script src="static/assets/js/util.js"></script>
 		<script src="static/assets/js/main.js"></script>
-		<script>
 	</body>
 </html>

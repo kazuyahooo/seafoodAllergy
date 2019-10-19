@@ -164,13 +164,12 @@ def searchEvent():
         searchEvents=list()
         if data['type'] =='byType':
             for element in data['data']:
-                searchEvents = col.find({'evnetType':element})
-                for searchEvent in searchEvents:
+                searchTyoe = col.find({element:'on'})
+                for searchEvent in searchType:
                     temp_event={
                             'eventName' :searchEvent['eventName'],
                             'http':searchEvent['email_'],
-                            'eventB_M' : searchEvent['eventM_B'],
-                            'eventB_F' : searchEvent['eventM_F'],
+                            'eventM_B' : searchEvent['eventM_B'],
                             'eventLocation' : searchEvent['evnetLocation'],
                             }
                     searchEvents.append(temp_event)
@@ -190,11 +189,10 @@ def searchEvent():
             remainderWords = list(filter(lambda a: a not in stopWords and a != '\n', segments))
             #print(remainderWords)
             for word in remainderWords:
-                findEvents = col.find({"eventName": data['data']})
+                findEvents = col.find({"eventName" : {'$regex' : ".*"+word+".*"}})
                 print(findEvents)
                 #print(word)
                 for match in findEvents:
-                    print('-------')
                     print(match)
                     events={
                         'eventName' :match['eventName'],
@@ -204,13 +202,6 @@ def searchEvent():
                     }
                     print(events)
                     searchEvents.append(events)
-            event={
-                'eventName' :data['data'],
-                'http':'http://www.google.tw',
-                'eventM_B' : '2019:10:15',
-                'eventLocation' : '台灣基隆市西岸旅客碼頭一樓門口 (（循雨都漫步傘標示）)',
-            }
-            searchEvents.append(event)
         return jsonify(searchEvents)
 
 
