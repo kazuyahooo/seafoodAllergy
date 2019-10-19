@@ -157,7 +157,7 @@ def local_company():
 
 @app.route('/searchcomplete', methods=['GET','POST'])
 def searchEvent():
-    if request.method=='POST':
+        if request.method=='POST':
         data= request.get_json(silent=True)
         print(data)
         ##主題搜尋
@@ -174,41 +174,41 @@ def searchEvent():
                             'eventLocation' : searchEvent['evnetLocation'],
                             }
                     searchEvents.append(temp_event)
-        #關鍵字搜尋 
+        ##關鍵字搜尋 
         if data['type'] =='byName':
-            # stopWords=[]
-            # segments=[]
-            # remainderWords=[]
+            stopWords=[]
+            segments=[]
+            remainderWords=[]
+            with open('stopwordlist.txt', 'r', encoding='UTF-8') as file:
+                for d in file.readlines():
+                    d = d.strip()
+                    stopWords.append(d)
             
-            # with open('stopwordlist.txt', 'r', encoding='UTF-8') as file:
-            #     for d in file.readlines():
-            #         d = d.strip()
-            #         stopWords.append(d)
+            text = data['data']
+            segments = jieba.cut(text, cut_all=False)
             
-            # text = data['data']
-            # segments = jieba.cut(text, cut_all=False)
-            
-            # remainderWords = list(filter(lambda a: a not in stopWords and a != '\n', segments))
-            
-            # for word in remainderWords:
-            #   #searchEvents = col.find({"eventName" : {"$regex" : "/"+word+"/", "$options" : "$i"}})
-            #   searchEvents = col.find({"eventName":word})
-            #   for searchEvent in searchEvents:
-                # temp_event={
-                #             'eventName' :searchEvent['eventName'],
-                #             'http':searchEvent['email_'],
-                #             'eventB_M' : searchEvent['eventM_B'],
-                #             'eventB_F' : searchEvent['eventM_F'],
-                #             'eventLocation' : searchEvent['evnetLocation'],
-                #             }
+            remainderWords = list(filter(lambda a: a not in stopWords and a != '\n', segments))
+            print(remainderWords)
+            for word in remainderWords:
+                findEvents = col.find({"eventName": {"$regex": "/"+word+"/"}})
+      
+                for match in findEvents:
+                    events={
+                        'eventName' :match['eventName'],
+                        'email':match['eamil_'],
+                        'eventB_M' : match['eventB_M'],
+                        'eventLocation' : match['eventLocation'],
+                    }
+                    print(events)
+                    searchEvents.append(events)
             event={
-                'eventName' :'gg123',
+                'eventName' :remainderWords,
                 'http':'http://www.google.tw',
                 'eventB_M' : '2019:10:15',
-                'eventLocation' : 'China Taipei',
+                'eventLocation' : '台灣基隆市西岸旅客碼頭一樓門口 (（循雨都漫步傘標示）)',
             }
             searchEvents.append(event)
-    return jsonify(searchEvents)
+        return jsonify(searchEvents)
 
 
 @app.route('/eventdetails',methods=['GET','POST'])
