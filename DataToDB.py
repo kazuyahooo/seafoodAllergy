@@ -18,6 +18,7 @@ app.config["MONGODB_HOST"] = "mongodb+srv://Liao:871029@cluster0-sk2jk.mongodb.n
 app.config["MONGODB_DB"] = True
 app.config['SECRET_KEY'] = 'super-secret'
 app.config['SECURITY_PASSWORD_SALT'] = 'bcrypt'
+app.config['SECURITY_LOGIN_USER_TEMPLATE']='security/login.html'
 app.jinja_env.auto_reload = True
 app.config['TEMPLATES_AUTO_RELOAD'] = True
 
@@ -85,11 +86,17 @@ def insert_data(event):
 @app.route('/')
 @app.route('/login', methods=['GET', 'POST']) 
 def login():
-    if request.method == 'POST': 
-        print(request.values.to_dict())
-        return 'Hello ' + request.values['username'] 
-
     return render_template('login.html')
+
+@app.route('/login_user', methods=['GET', 'POST'])
+def login_Use():
+    nowUser = request.values.to_dict()
+    print(nowUser)
+    if user_datastore.get_user(nowUser['email']) is None:
+        return redirect('/login')
+    nowUser=user_datastore.get_user(nowUser['email'])
+    login_user(nowUser)
+    return redirect('index.html')
            
            
 @app.route('/index.html', methods=['GET'])
@@ -147,52 +154,57 @@ def searchPage():
 @app.route('/searchcomplete', methods=['GET','POST'])
 def searchEvent():
     if request.method=='POST':
-        data= request.get_json()
+        data= request.get_json(silent=True)
         print(data)
         ##主題搜尋
-        events=list()
-        if data['type'] =='byName':
+        searchEvents=list()
+        if data['type'] =='byType':
             for element in data['data']:
-                events = col.find({'evnetType':element})
-                for event in events:
+                searchEvents = col.find({'evnetType':element})
+                for searchEvent in searchEvents:
                     temp_event={
-                            'eventName' :event['eventName'],
-                            'http':event['email_'],
-                            'eventB_M' : event['eventM_B'],
-                            'eventB_F' : event['eventM_F'],
-                            'eventLocation' : event['evnetLocation'],
+                            'eventName' :searchEvent['eventName'],
+                            'http':searchEvent['email_'],
+                            'eventB_M' : searchEvent['eventM_B'],
+                            'eventB_F' : searchEvent['eventM_F'],
+                            'eventLocation' : searchEvent['evnetLocation'],
                             }
-                    events.append(temp_event)
+                    searchEvents.append(temp_event)
         #關鍵字搜尋 
         if data['type'] =='byName':
-            stopWords=[]
-            segments=[]
-            remainderWords=[]
+            # stopWords=[]
+            # segments=[]
+            # remainderWords=[]
             
-            with open('stopwordlist.txt', 'r', encoding='UTF-8') as file:
-                for d in file.readlines():
-                    d = d.strip()
-                    stopWords.append(d)
+            # with open('stopwordlist.txt', 'r', encoding='UTF-8') as file:
+            #     for d in file.readlines():
+            #         d = d.strip()
+            #         stopWords.append(d)
             
-            text = data['eventNname']
-            segments = jieba.cut(text, cut_all=False)
+            # text = data['data']
+            # segments = jieba.cut(text, cut_all=False)
             
-            remainderWords = list(filter(lambda a: a not in stopWords and a != '\n', segments))
+            # remainderWords = list(filter(lambda a: a not in stopWords and a != '\n', segments))
             
-            for i in remainderWords:
-              remainderWords.remove(' ')
-            for word in remainderWords:
-              events = col.find({"eventName" : {"$regex" : "/"+word+"/", "$options" : "$i"}})
-              for event in events:
-                temp_event={
-                            'eventName' :event['eventName'],
-                            'http':event['email_'],
-                            'eventB_M' : event['eventM_B'],
-                            'eventB_F' : event['eventM_F'],
-                            'eventLocation' : event['evnetLocation'],
-                            }
-                events.append(temp_event)
-        return jsonify(events)
+            # for word in remainderWords:
+            #   #searchEvents = col.find({"eventName" : {"$regex" : "/"+word+"/", "$options" : "$i"}})
+            #   searchEvents = col.find({"eventName":word})
+            #   for searchEvent in searchEvents:
+                # temp_event={
+                #             'eventName' :searchEvent['eventName'],
+                #             'http':searchEvent['email_'],
+                #             'eventB_M' : searchEvent['eventM_B'],
+                #             'eventB_F' : searchEvent['eventM_F'],
+                #             'eventLocation' : searchEvent['evnetLocation'],
+                #             }
+            event={
+                'eventName' :'gg123',
+                'http':'http://www.google.tw',
+                'eventB_M' : '2019:10:15',
+                'eventLocation' : 'China Taipei',
+            }
+            searchEvents.append(event)
+        return jsonify(searchEvents)
 #    data= request.get_json()
 #    print(data)
 #    events=list()
@@ -218,6 +230,16 @@ def searchEvent():
 ##    print(eventsRS)
 #    return '123'
 
+@app.route('/eventdetails',methods=['GET','POST'])
+def showEvents():
+    data= request.get_json()
+    activity_data=col.find_one({"eventName":data["eventName"]})
+    return render_template('events.html',activity= activity_data)
+
+@app.route('/adminControl',methods=['GET','POST'])
+def IamAdmin():
+    return render_template('index_Logined.html')
 
 app.run(host="140.121.199.231",port="27018")
 #127.0.0.1
+#140.121.199.231

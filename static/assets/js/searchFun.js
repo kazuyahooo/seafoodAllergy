@@ -1,6 +1,9 @@
 //var searchResult;
 var postType = ["byName","byLocation","byType"];
 var postReg;
+var ipconfig = "140.199.121.231"
+
+
 function setResult(searchResult)
 {
 	$('#three').empty();
@@ -28,11 +31,12 @@ function setResult(searchResult)
 
 function searchRequest(){
 	var selected= [];
+	console.log($('#eventName').val());
 	if(postReg == 0){
 		$.ajax({
 		type: 'POST',
-		url: "http://140.121.199.231:27018/searchcomplete",
-		data: {"type" : postType[postReg] , "data" : $('#eventName').val()},
+		url: "http://"+ipconfig+"/searchcomplete",
+		data: JSON.stringify({"type" : postType[postReg] , "data" : $('#eventName').val().toString()}),
 		contentType: 'application/json',
 		success: setResult
 		});
@@ -50,7 +54,7 @@ function searchRequest(){
 
 		$.ajax({
 		type: 'POST',
-		url: "http://140.121.199.231:27018/searchcomplete",
+		url: "http://"+ipconfig+"/searchcomplete",
 		data: {"type" : postType[postReg] , "data" : selected},
 		contentType: 'application/json',
 		success: setResult
