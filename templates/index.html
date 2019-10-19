@@ -50,82 +50,11 @@
 				  </ul>
 				<div id="tab01" class="tab-inner">
 				<h1 style="font-size:50px; text-align:center;" >最新活動</h1>
-				<div class="inner flex flex-3">
-					<div class="flex-item box"><a href={{event[0].http}} style="text-decoration:none;" target="_blank">
-						<div class="image fit">
-							<img src="static/images/pic01.jpg" alt="" />
-						</div>
-						<div class="content">
-							<h3>【潮一夏】 —探訪八斗子潮間帶生態</h3>
-							<p><b><span style="color:#AAAAAA;">活動時間 : <br>2019-05-04~2019-08-30</span></b></p>
-							<p><b><span style="color:#AAAAAA;">活動地點 : <br>基隆市中正區北寧路369巷61號</span></b></p>
-							
-						</a></div>
-					</div>
-					
-					<div class="flex-item box"><a href="https://www.accupass.com/event/1909140357534178828000"style="text-decoration:none;"target="_blank">
-						<div class="image fit">
-							<img src="static/images/pic02.png" alt="" />
-						</div>
-						<div class="content">
-							<h3> 海科館第二屆寶寶爬行比賽 暨萬聖節主題秋季親子日</h3>
-							<p><b><span style="color:#AAAAAA;">活動時間 : <br>2019-10-26</span></b></p>
-							<p><b><span style="color:#AAAAAA;">活動地點 : <br>基隆市中正區北寧路367號</span></b></p>
-						</a></div>
-					</div>
-					
-					<div class="flex-item box" ><a href="https://www.accupass.com/event/1901271544488531904750"style="text-decoration:none;"target="_blank">
-						<div class="image fit">
-							<img src="static/images/pic03.png" alt="" />
-						</div>
-						<div class="content">
-							<h3> 港畔光曲</h3>
-							<p><b><span style="color:#AAAAAA;">活動時間 : <br>2019-01-01 ~ 2019-12-31 </span></b></p>
-							<p><b><span style="color:#AAAAAA;">活動地點 : <br>陽明海洋文化藝術館一樓廣場 (循雨都漫步傘標示)</span></b></p>
-						</a></div>
-					</div>		
-				</div>	
-				<div align="center"><b><a href="#" style="text-align:center;width:20%;font-size:23px;color:#25a2c3;text-decoration:none;"><br>SEE MORE</a></b></div></div>
+				<span id="latestEvent_1"></span>
 				
 				<div id="tab02" class="tab-inner">
 				<h1 style="font-size:50px;text-align:center;">近期建立</h1>
-				<div class="inner flex flex-3">
-					<div class="flex-item box"><a href={{event[0].http}} style="text-decoration:none;" target="_blank">
-						<div class="image fit">
-							<img src="static/images/pic01.jpg" alt="" />
-						</div>
-						<div class="content">
-							<h3>【潮一夏】 —探訪八斗子潮間帶生態</h3>
-							<p><b><span style="color:#AAAAAA;">活動時間 : <br>2019-05-04~2019-08-30</span></b></p>
-							<p><b><span style="color:#AAAAAA;">活動地點 : <br>基隆市中正區北寧路369巷61號</span></b></p>
-							
-						</a></div>
-					</div>
-					
-					<div class="flex-item box"><a href="https://www.accupass.com/event/1909140357534178828000"style="text-decoration:none;"target="_blank">
-						<div class="image fit">
-							<img src="static/images/pic02.png" alt="" />
-						</div>
-						<div class="content">
-							<h3> 海科館第二屆寶寶爬行比賽 暨萬聖節主題秋季親子日</h3>
-							<p><b><span style="color:#AAAAAA;">活動時間 : <br>2019-10-26</span></b></p>
-							<p><b><span style="color:#AAAAAA;">活動地點 : <br>基隆市中正區北寧路367號</span></b></p>
-						</a></div>
-					</div>
-					
-					<div class="flex-item box" ><a href="https://www.accupass.com/event/1901271544488531904750"style="text-decoration:none;"target="_blank">
-						<div class="image fit">
-							<img src="static/images/pic03.png" alt="" />
-						</div>
-						<div class="content">
-							<h3> 港畔光曲</h3>
-							<p><b><span style="color:#AAAAAA;">活動時間 : <br>2019-01-01 ~ 2019-12-31 </span></b></p>
-							<p><b><span style="color:#AAAAAA;">活動地點 : <br>陽明海洋文化藝術館一樓廣場 (循雨都漫步傘標示)</span></b></p>
-						</a></div>
-					</div>		
-				</div>		
-				<div align="center"><b><a href="#" style="text-align:center;width:20%;font-size:23px;color:#25a2c3;text-decoration:none;"><br>SEE MORE</a></b></div></div>
-				</div>
+				<span id="latestEvent_2"></span>
 				
 			</section>	
 			
@@ -188,6 +117,69 @@
 				$li.click(function(){
 				$($(this).find('a'). attr ('id')).show().siblings ('.tab-inner').hide();
 				$(this).addClass('active'). siblings ('.active').removeClass('active');});
+				});
+				
+				function setResult_1(searchResult){
+				$('#latestEvent_1').empty();
+				var popContent ;
+				for(var i=0;i<3;i++){
+					popContent += '<div class="inner flex flex-3">';
+						popContent +=
+							'<form action="/eventdetails"  method="POST" enctype="multipart/form-data" name="form-search" id="form-search"><input type="hidden" name="eventName" value="'+searchResult[i].eventName+'">'+
+							'<div class="flex-item box" onClick="document.forms[\'form-search\'].submit();"><a style="text-decoration:none;" target="_blank">';
+						popContent +=
+							'<div class="image fit"><img src="static/images/'+searchResult[i].eventName+'.jpg" alt="" /></div>';
+						popContent +=
+							'<div class="content">'+
+							'<h3>'+searchResult[i].eventName+'</h3>'+
+							'<p><b><span style="color:#AAAAAA;">活動時間 : <br>'+searchResult[i].eventM_B+'</b></p>'+
+							'<p><b><span style="color:#AAAAAA;">活動地點 : <br>'+searchResult[i].eventLocation+'</span></b></p>'+
+							'</div></a></div></form>';
+					}
+					popContent += '<div align="center"><b><a href="#" style="text-align:center;width:20%;font-size:23px;color:#25a2c3;text-decoration:none;"><br>SEE MORE</a></b></div>';
+				$('#latestEvent_1').append(popContent);
+				}
+				
+				function setResult_2(searchResult){
+				$('#latestEvent_2').empty();
+				var popContent;
+				for(var i=0;i<3;i++){
+					popContent += '<div class="inner flex flex-3">';
+						popContent +=
+							'<form action="/eventdetails"  method="POST" enctype="multipart/form-data" name="form-search" id="form-search"><input type="hidden" name="eventName" value="'+searchResult[i].eventName+'">'+
+							'<div class="flex-item box" onClick="document.forms[\'form-search\'].submit();"><a style="text-decoration:none;" target="_blank">';
+						popContent +=
+							'<div class="image fit"><img src="static/images/'+searchResult[i].eventName+'.jpg" alt="" /></div>';
+						popContent +=
+							'<div class="content">'+
+							'<h3>'+searchResult[i].eventName+'</h3>'+
+							'<p><b><span style="color:#AAAAAA;">活動時間 : <br>'+searchResult[i].eventM_B+'</b></p>'+
+							'<p><b><span style="color:#AAAAAA;">活動地點 : <br>'+searchResult[i].eventLocation+'</span></b></p>'+
+							'</div></a></div></form>';
+					}
+					popContent += '<div align="center"><b><a href="#" style="text-align:center;width:20%;font-size:23px;color:#25a2c3;text-decoration:none;"><br>SEE MORE</a></b></div>';
+				$('#latestEvent_2').append(popContent);
+				}
+				
+				var ipconfig = "127.0.0.1:5000";
+				$(document).ready(function(){
+						$.ajax({
+						type: 'POST',
+						url: "http://"+ipconfig+"/searchcomplete",
+						data: JSON.stringify({ type : "recently"}),
+						contentType: 'application/json; charset=utf-8',
+						success: setResult_1
+						});
+				});
+				
+				$(document).ready(function(){
+						$.ajax({
+						type: 'POST',
+						url: "http://"+ipconfig+"/searchcomplete",
+						data: JSON.stringify({ type : "upLoadTime"}),
+						contentType: 'application/json; charset=utf-8',
+						success: setResult_2
+						});
 				});
 			</script>
 			<script src="static/assets/js/jquery.scrolly.min.js"></script>
