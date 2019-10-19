@@ -157,7 +157,7 @@ def local_company():
 
 @app.route('/searchcomplete', methods=['GET','POST'])
 def searchEvent():
-        if request.method=='POST':
+    if request.method=='POST':
         data= request.get_json(silent=True)
         print(data)
         ##主題搜尋
@@ -188,23 +188,26 @@ def searchEvent():
             segments = jieba.cut(text, cut_all=False)
             
             remainderWords = list(filter(lambda a: a not in stopWords and a != '\n', segments))
-            print(remainderWords)
+            #print(remainderWords)
             for word in remainderWords:
-                findEvents = col.find({"eventName": {"$regex": "/"+word+"/"}})
-      
+                findEvents = col.find({"eventName": data['data']})
+                print(findEvents)
+                #print(word)
                 for match in findEvents:
+                    print('-------')
+                    print(match)
                     events={
                         'eventName' :match['eventName'],
-                        'email':match['eamil_'],
-                        'eventB_M' : match['eventB_M'],
+                        'email':match['email_'],
+                        'eventM_B' : match['eventM_B'],
                         'eventLocation' : match['eventLocation'],
                     }
                     print(events)
                     searchEvents.append(events)
             event={
-                'eventName' :remainderWords,
+                'eventName' :data['data'],
                 'http':'http://www.google.tw',
-                'eventB_M' : '2019:10:15',
+                'eventM_B' : '2019:10:15',
                 'eventLocation' : '台灣基隆市西岸旅客碼頭一樓門口 (（循雨都漫步傘標示）)',
             }
             searchEvents.append(event)
@@ -213,7 +216,7 @@ def searchEvent():
 
 @app.route('/eventdetails',methods=['GET','POST'])
 def showEvents():
-    data= request.get_json()
+    data= request.values.to_dict()
     activity_data=col.find_one({"eventName":data["eventName"]})
     return render_template('events.html',activity= activity_data)
 
@@ -230,6 +233,6 @@ def admin_edit():
     
 
 
-app.run()
+app.run(host ='140.121.199.231',port = '27018')
 #127.0.0.1
 #140.121.199.231

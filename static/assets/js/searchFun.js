@@ -1,7 +1,7 @@
 //var searchResult;
 var postType = ["byName","byLocation","byType"];
 var postReg;
-var ipconfig = "127.0.0.1:27018"
+var ipconfig = "140.121.199.231:27018"
 
 
 function rederictEvent(name){
