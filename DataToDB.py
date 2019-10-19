@@ -204,9 +204,24 @@ def searchEvent():
                     print(events)
                     searchEvents.append(events)
             return jsonify(searchEvents)
-        # #3 Latest event 
-        # if data['type']=='recently':
-        #     #latestquery=col.find({"eventM_B" : { "$gt" : { "$date" : "2015-01-01"}})
+        #3 Latest event 
+        if data['type']=='recently':
+            lastupload = col.aggregate([{ "$sort": { "eventM_B": -1 } }])
+            count = 0
+            for i in lastupload:
+                count+=1
+                for match in lastupload:
+                    events={
+                        'eventName' :match['eventName'],
+                        'email':match['email_'],
+                        'eventM_B' : match['eventM_B'],
+                        'eventLocation' : match['eventLocation'],
+                    }
+                    print(events)
+                searchEvents.append(events)
+                if count == 3:
+                    break
+            return jsonify(searchEvents)
             
         # #3 earlist upload time
         if data['type']=='upLoadTime':
@@ -218,6 +233,7 @@ def searchEvent():
                     'eventM_B' : match['eventM_B'],
                     'eventLocation' : match['eventLocation'],
                 }
+                print(events)
                 searchEvents.append(events)
             return jsonify(searchEvents)
 
