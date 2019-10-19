@@ -164,15 +164,16 @@ def searchEvent():
         searchEvents=list()
         if data['type'] =='byType':
             for element in data['data']:
-                searchTyoe = col.find({element:'on'})
+                searchType = col.find({element:'on'})
                 for searchEvent in searchType:
                     temp_event={
                             'eventName' :searchEvent['eventName'],
                             'http':searchEvent['email_'],
                             'eventM_B' : searchEvent['eventM_B'],
-                            'eventLocation' : searchEvent['evnetLocation'],
+                            'eventLocation' : searchEvent['eventLocation'],
                             }
                     searchEvents.append(temp_event)
+            return jsonify(searchEvents)
         ##關鍵字搜尋 
         if data['type'] =='byName':
             stopWords=[]
@@ -202,7 +203,12 @@ def searchEvent():
                     }
                     print(events)
                     searchEvents.append(events)
-        return jsonify(searchEvents)
+            return jsonify(searchEvents)
+        # #3 Latest event 
+        # if data['type']=='recently':
+            
+        # #3 earlist upload time
+        # if data['type']=='upLoadTime':
 
 
 # @app.route('/eventdetails',methods=['GET','POST'])
@@ -214,10 +220,13 @@ def searchEvent():
 def showEvents():
     data= request.values.to_dict()
     activity_data=col.find_one({"eventName":data["eventName"]})
-    tempB=str(activity_data['eventM_B'])
-    tempF=str(activity_data['eventM_F'])
-    tempB=tempB.replace("T"," ")
-    tempF=tempF.replace("T"," ")
+    tempB=activity_data['eventM_B']
+    tempF=activity_data['eventM_F']
+    print(tempB+'\n')
+    print(type(tempB))
+    tempB.replace("T"," ")
+    tempF.replace("T"," ")
+    print(tempB)
 
     activity_data['eventM_B']=tempB
     activity_data['eventM_F']=tempF
