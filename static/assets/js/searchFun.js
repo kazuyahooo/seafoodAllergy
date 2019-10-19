@@ -1,8 +1,7 @@
 //var searchResult;
 var postType = ["byName","byLocation","byType"];
 var postReg;
-//var ipconfig = "140.199.121.231"
-var ipconfig = "127.0.0.1:5000"
+var ipconfig = "140.121.199.231:27018"
 
 function setResult(searchResult)
 {
@@ -12,7 +11,7 @@ function setResult(searchResult)
 		popContent += '<div class="inner flex flex-3">';
 		for(var j=0;j<3 && i*3+j < searchResult.length;j++){
 			popContent +=
-				'<div class="flex-item box"><a href={{searchResult['+(i*3+j)+'].http}} style="text-decoration:none;" target="_blank">';
+				'<><div class="flex-item box"><a style="text-decoration:none;" target="_blank">';
 			popContent +=
 				'<div class="image fit"><img src="static/images/'+searchResult[(i*3+j)].eventName+'.jpg" alt="" /></div>';
 			popContent +=
@@ -37,7 +36,7 @@ function searchRequest(){
 		type: 'POST',
 		url: "http://"+ipconfig+"/searchcomplete",
 		data: JSON.stringify({"type" : postType[postReg] , "data" : $('#eventName').val().toString()}),
-		contentType: 'application/json',
+		contentType: 'application/json; charset=utf-8',
 		success: setResult
 		});
 	}
@@ -56,7 +55,7 @@ function searchRequest(){
 		type: 'POST',
 		url: "http://"+ipconfig+"/searchcomplete",
 		data: {"type" : postType[postReg] , "data" : selected},
-		contentType: 'application/json',
+		contentType: 'application/json; charset=utf-8',
 		success: setResult
 		});
 	}
