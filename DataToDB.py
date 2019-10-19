@@ -211,7 +211,7 @@ def searchEvent():
         # #3 earlist upload time
         if data['type']=='upLoadTime':
             lastupload = col.find().skip(col.count() - 3)
-            for i in lastupload:
+            for match in lastupload:
                 events={
                     'eventName' :match['eventName'],
                     'email':match['email_'],
