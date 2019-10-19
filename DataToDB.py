@@ -1,7 +1,7 @@
 import os
 import flask
 from flask import render_template, request, jsonify, redirect, url_for
-from flask_security import Security, MongoEngineUserDatastore, UserMixin, RoleMixin, login_required, current_user, roles_accepted
+from flask_security import Security, MongoEngineUserDatastore ,login_user, logout_user, UserMixin, RoleMixin, login_required, current_user, roles_accepted
 from pymongo import MongoClient
 from flask_mongoengine import MongoEngine
 from werkzeug.utils import secure_filename
@@ -76,13 +76,22 @@ def insert_data(event):
     #else:
         #print(col.find_one({"eventName":event["eventName"]}))
 
+#@app.route('/')
+#def login():
+#    if current_user.is_authenticated:
+#        return redirect('index.html')
+#    return render_template('login.html')
+#    
 @app.route('/')
+@app.route('/login', methods=['GET', 'POST']) 
 def login():
-    if current_user.is_authenticated:
-        return redirect('index.html')
-    return render_template('login.html')
-    
+    if request.method == 'POST': 
+        print(request.values.to_dict())
+        return 'Hello ' + request.values['username'] 
 
+    return render_template('login.html')
+           
+           
 @app.route('/index.html', methods=['GET'])
 def home():
     temp_events=list()
