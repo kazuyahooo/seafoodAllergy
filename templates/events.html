@@ -1,0 +1,163 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>建立活動</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<link rel="stylesheet" href="static/assets/css/main.css" />
+	</head>
+	<body class="subpage">
+
+		<!-- Header -->
+			<header id="header">
+				<nav class="left">
+					<a href="#menu"><span>Menu</span></a>	
+				</nav>
+				<a href="elements.html" class="logo">建立活動</a>
+				<div id="nlogin">
+					<nav class="right" >
+						<a href="login.html" onclick="document.getElementById('alogin').style.display=''" class="button alt">登入</a>
+					</nav>
+				</div>
+				<div id="alogin", style="display: none">
+
+				</div>
+				</nav>
+				
+			</header>
+
+		<!-- Menu -->
+			<nav id="menu">
+				<ul class="links">
+					<li><a href="index.html">主頁</a></li>
+					<li><a href="search">搜尋活動</a></li>
+					<li><a href="elements.html">建立活動</a></li>
+					<li><a href="local.html">在地商家</a></li>
+				</ul>
+			</nav>
+
+		<!-- Main -->
+			<section id="main" class="wrapper">
+				<div class="inner">
+					<header class="align-center">
+						<h1>刊登活動</h1>
+						<p>在這，你可以刊登您所要舉行的活動</p>
+					</header>
+
+					<!-- Content -->
+					<h2 id="content">活動名稱</h2>
+						<form method=["POST"] action="/complete" enctype="multipart/form-data">					
+						<p>
+							<label> 活動名稱:
+								<h1>{{activity.eventName}}!</h1>
+							</label>
+						</p>
+						<h2 id="content">封面宣傳照</h2>
+						<input type="file" id="event_photo" name="event_photo" accept="image/jpg, image/jpeg, image/png"><br>
+						<img id="event_img" style="width:438px;height:219px;" src="static/images/ex_pic.jpg"  />
+						<h2 id="content">活動日期</h2>
+						<p><label> 開始時間:<h1>{{activity.eventM_B}}!</h1></label></p>
+						<p><label> 結束時間:<h1>{{activity.eventM_F}}!</h1></label></p>
+						
+						<h2 id="content">活動地點</h2>
+						<p><label> 活動地點:<h1>{{activity.eventM_F}}!</h1></label></p>
+						<iframe width='100%' height='200' frameborder='0' scrolling='no' marginheight='0' marginwidth='0' src='https://maps.google.com.tw/maps?f=q&hl=zh-TW&geocode=&q=台北市&z=16&output=embed&t='></iframe>
+
+						<h2 id="content">活動分類</h2>
+						<p><label> 請勾選活動分類(可複選,至少一項)
+							<div style="display: inline-block;">
+								<input type="checkbox" name="learn" id="learn" >
+								<label for="learn">學習</label>
+							</div>
+							<div style="display: inline-block;">
+								<input type="checkbox" name="art" id="art" >
+								<label for="art">藝文</label>
+							</div>
+							<div style="display: inline-block;">
+								<input type="checkbox" name="sport" id="sport" >
+								<label for="sport">運動</label>
+							</div>
+							<div style="display: inline-block;">
+								<input type="checkbox" name="ocean" id="ocean" >
+								<label for="ocean">海洋</label>
+							</div>
+							<div style="display: inline-block;">
+								<input type="checkbox" name="fishery" id="fishery" >
+								<label for="fishery">漁業</label>
+							</div>
+							<div style="display: inline-block;">
+								<input type="checkbox" name="welfare" id="welfare" >
+								<label for="welfare">公益</label>
+							</div>
+							<div style="display: inline-block;">
+								<input type="checkbox" name="techlogy" id="techlogy" >
+								<label for="techlogy">科技</label>
+							</div>
+							<div style="display: inline-block;">
+								<input type="checkbox" name="health" id="health" >
+								<label for="health">健康</label>
+							</div>
+							<div style="display: inline-block;">
+								<input type="checkbox" name="entertainment" id="entertainment" >
+								<label for="entertainment">娛樂</label>
+							</div>
+							<br>
+							<div id="otherclass">
+								其他&nbsp;&nbsp;<input style="width:20%;height:2.8em;" type="text" name="otherclass" id="otherclass">
+							</div>		
+						</p>
+
+						<h2 id="content">活動詳情、說明</h2>
+						
+						<label> 活動詳情、說明:<h1>{{activity.eventDetail}}!</h1></label>
+
+						<h2 id="content">活動規劃進度</h2>
+							<!-- <div>
+								<a href="javascript:;" onclick="document.getElementById('nec_hid').style.display='none'">
+									<input type="radio" id="Y" name="eventReady" value="Y" checked >
+									<label for="Y" style="font-size: 23px;">已籌畫完成</label></a>
+								<a href="javascript:;" onclick="document.getElementById('nec_hid').style.display=''">
+									<input type="radio" id="N" name="eventReady" value="N" >
+									<label for="N" style="font-size: 23px;">我仍在籌畫</label></a>
+									<h1>{{activity.eventReady}}!</h1>
+							</div>
+ -->
+							<div id="nec_hid" style="display: none"> <label >籌備所需<h1>{{activity.necessary}}!</h1></label></div>
+					<hr class="major" />
+
+						<!-- Form -->
+							<h1>活動聯絡人資訊</h1>
+								<div class="row uniform">
+									<div class="6u 12u$(xsmall)"><h1>{{activity.name}}!</h1></div>
+									<div class="6u$ 12u$(xsmall)"><h1>{{activity.email}}!</h1></div>
+									<div class="6u 12u$(xsmall)"><h1>{{activity.phonenum_}}!</h1></div>
+									<div class="12u$"><h1>{{activity.address_}}!</h1></div>
+									<div class="12u$"><h1>{{activity.remark}}!</h1></div>
+								</div>
+						</form>
+					<hr/>
+				</div>
+			</section>
+
+		<!-- Footer -->
+			<footer id="footer">
+				<div class="inner">
+					<h2>Seafood Allergy</h2>
+					<ul class="actions">
+						<li><span class="icon fa-phone"></span> <a href="#">0965728008</a></li>
+						<li><span class="icon fa-envelope"></span> <a href="#">kaz749283@gmail.com</a></li>
+						<li><span class="icon fa-map-marker"></span> 123 Somewhere Road, Nashville, TN 00000</li>
+					</ul>
+					<p>Author:WEI WANG Hopeful LEE Wei KUANG CAPTAIN LIANG SHAN LEE </p>
+				</div>
+			</footer>
+
+		<!-- Scripts -->
+		<script src="static/assets/js/jquery.min.js"></script>
+		<script src="static/assets/js/jquery.scrolly.min.js"></script>
+		<script src="static/assets/js/skel.min.js"></script>
+		<script src="static/assets/js/util.js"></script>
+		<script src="static/assets/js/main.js"></script>
+		<script>
+	</body>
+</html>
