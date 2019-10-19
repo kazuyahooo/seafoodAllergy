@@ -30,7 +30,7 @@ class Role(db.Document, RoleMixin):
 
 # 使用者資訊
 class User(db.Document, UserMixin):
-    username = db.StringField(max_length=255)
+    email = db.StringField(max_length=255)
     password = db.StringField(max_length=255)
     active = db.BooleanField(default=True)
     confirmed_at = db.DateTimeField()
@@ -51,17 +51,17 @@ def create_user():
     user_role = user_datastore.find_or_create_role('user')
     if user_datastore.get_user('user') == None:
         user_datastore.create_user(
-            username='user', password='user', roles=[user_role]
+            email='user', password='user', roles=[user_role]
         )
     admin_role = user_datastore.find_or_create_role('admin')
     if user_datastore.get_user('root') == None:
         user_datastore.create_user(
-            username='root', password='root', roles=[admin_role]
+            email='root', password='root', roles=[admin_role]
         )
     guest_role = user_datastore.find_or_create_role('guest')
     if user_datastore.get_user('guest') == None:
         user_datastore.create_user(
-            username='guest', password='guest', roles=[guest_role]
+            email='guest', password='guest', roles=[guest_role]
         )
         
 def insert_data(event):
