@@ -1,8 +1,8 @@
 //var searchResult;
 var postType = ["byName","byLocation","byType"];
 var postReg;
-var ipconfig = "140.199.121.231"
-
+//var ipconfig = "140.199.121.231"
+var ipconfig = "127.0.0.1:5000"
 
 function setResult(searchResult)
 {

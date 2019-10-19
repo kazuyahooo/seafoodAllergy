@@ -96,10 +96,10 @@ def login_Use():
         return redirect('/login')
     nowUser=user_datastore.get_user(nowUser['email'])
     login_user(nowUser)
-    return redirect('index.html')
+    return redirect('index')
            
            
-@app.route('/index.html', methods=['GET'])
+@app.route('/index', methods=['GET'])
 def home():
     temp_events=list()
     event={
@@ -119,9 +119,9 @@ def home():
     temp_events.append(event)
     return render_template("index.html",event = temp_events)
 
-@app.route('/elements.html')
+@app.route('/upLoadEvent')
 def element():
-    return render_template("elements.html")
+    return render_template("upLoadEvent.html")
 
 def allowed_file(filename):
     return '.' in filename and \
@@ -149,7 +149,11 @@ def complete():
 
 @app.route('/search', methods=['GET'])
 def searchPage():
-    return render_template('generic.html')
+    return render_template('search.html')
+
+@app.route('/localCompany',methods=['GET','POST'])
+def local_company():
+    return render_template('localCompany.html')
 
 @app.route('/searchcomplete', methods=['GET','POST'])
 def searchEvent():
@@ -204,31 +208,8 @@ def searchEvent():
                 'eventLocation' : 'China Taipei',
             }
             searchEvents.append(event)
-        return jsonify(searchEvents)
-#    data= request.get_json()
-#    print(data)
-#    events=list()
-#    event={
-#            'eventName' :'gg123',
-#            'http':'http://www.google.tw',
-#            'eventB_M' : '2019:10:15',
-#            'eventLocation' : 'China Taipei',
-#    }
-#    events.append(event)
-#    return jsonify(events)
-#    searchResult=list()
-#    searchEventName = request.values['searchEventName']
-#    print('\n\n'+searchEventName+'\n')
-#    events= col.find({'eventName':searchEventName})
-#    for event in events:
-#        del event['_id']
-#        searchResult.append(event)
-#        print(event)
-#    return jsonify(searchResult)
-##    print('\n\n'+events+'\n')
-##    eventsRS = col.find_one({"eventName":searchEventName})
-##    print(eventsRS)
-#    return '123'
+    return jsonify(searchEvents)
+
 
 @app.route('/eventdetails',methods=['GET','POST'])
 def showEvents():
@@ -236,10 +217,19 @@ def showEvents():
     activity_data=col.find_one({"eventName":data["eventName"]})
     return render_template('events.html',activity= activity_data)
 
-@app.route('/adminControl',methods=['GET','POST'])
+@app.route('/index_Logined',methods=['GET','POST'])
 def IamAdmin():
     return render_template('index_Logined.html')
 
-app.run(host="140.121.199.231",port="27018")
+@roles_accepted('admin')
+@app.route('/adminEdit', methods=['GET','POST'])
+def admin_edit():
+    data= request.get_json()
+    col.delete_one({"eventName":data["eventName"]})
+    return render_template("editEvent.html")
+    
+
+
+app.run()
 #127.0.0.1
 #140.121.199.231
