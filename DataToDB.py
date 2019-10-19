@@ -5,7 +5,7 @@ from flask_security import Security, MongoEngineUserDatastore ,login_user, logou
 from pymongo import MongoClient
 from flask_mongoengine import MongoEngine
 from werkzeug.utils import secure_filename
-
+import jieba
 UPLOAD_FOLDER = 'static/images'
 ALLOWED_EXTENSIONS = set(['txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'])
 
@@ -146,17 +146,61 @@ def searchPage():
 
 @app.route('/searchcomplete', methods=['GET','POST'])
 def searchEvent():
-    data= request.get_json()
-    print(data)
-    events=list()
-    event={
-            'eventName' :'gg123',
-            'http':'http://www.google.tw',
-            'eventB_M' : '2019:10:15',
-            'eventLocation' : 'China Taipei',
-    }
-    events.append(event)
-    return jsonify(events)
+    if request.method=='POST':
+        data= request.get_json()
+        print(data)
+        ##主題搜尋
+        events=list()
+        for element in data['data']:
+            events = col.find({'evnetType':element})
+            for event in events:
+                temp_event={
+                        'eventName' :event['eventName'],
+                        'http':event['email_'],
+                        'eventB_M' : event['eventM_B'],
+                        'eventB_F' : event['eventM_F'],
+                        'eventLocation' : event['evnetLocation'],
+                        }
+                events.append(temp_event)        
+        stopWords=[]
+        segments=[]
+        remainderWords=[]
+        ##關鍵字搜尋
+        with open('stopwordlist.txt', 'r', encoding='UTF-8') as file:
+            for d in file.readlines():
+                d = d.strip()
+                stopWords.append(d)
+        
+        text = data['eventNname']
+        segments = jieba.cut(text, cut_all=False)
+        
+        remainderWords = list(filter(lambda a: a not in stopWords and a != '\n', segments))
+        
+        for i in remainderWords:
+          remainderWords.remove(' ')
+        for word in remainderWords:
+          events = col.find({"eventName" : {"$regex" : "/"+word+"/", "$options" : "$i"}})
+          for event in events:
+            temp_event={
+                        'eventName' :event['eventName'],
+                        'http':event['email_'],
+                        'eventB_M' : event['eventM_B'],
+                        'eventB_F' : event['eventM_F'],
+                        'eventLocation' : event['evnetLocation'],
+                        }
+            events.append(temp_event)
+        return jsonify(events)
+#    data= request.get_json()
+#    print(data)
+#    events=list()
+#    event={
+#            'eventName' :'gg123',
+#            'http':'http://www.google.tw',
+#            'eventB_M' : '2019:10:15',
+#            'eventLocation' : 'China Taipei',
+#    }
+#    events.append(event)
+#    return jsonify(events)
 #    searchResult=list()
 #    searchEventName = request.values['searchEventName']
 #    print('\n\n'+searchEventName+'\n')
