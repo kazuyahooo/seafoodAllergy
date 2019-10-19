@@ -2,6 +2,7 @@
 var postType = ["byName","byLocation","byType"];
 var postReg;
 var ipconfig = "140.121.199.231:27018"
+//var ipconfig = "127.0.0.1:27018"
 
 
 function rederictEvent(name){
@@ -34,8 +35,8 @@ function setResult(searchResult)
 			popContent +=
 				'<div class="content">'+
 				'<h3>'+searchResult[i*3+j].eventName+'</h3>'+
-				'<p><b><span style="color:#AAAAAA;">活動時間 : '+searchResult[i*3+j].eventM_B+'</b></p>'+
-				'<p><b><span style="color:#AAAAAA;">活動地點 : '+searchResult[i*3+j].eventLocation+'</span></b></p>'+
+				'<p><b><span style="color:#AAAAAA;">活動時間 : <br>'+searchResult[i*3+j].eventM_B+'</b></p>'+
+				'<p><b><span style="color:#AAAAAA;">活動地點 : <br>'+searchResult[i*3+j].eventLocation+'</span></b></p>'+
 				'</div></a></div></form>';
 		}
 		popContent += '</div>';
@@ -58,20 +59,20 @@ function searchRequest(){
 		});
 	}
 	if(postReg == 2){
-		if($('#learn').check){selected.push("learn");}
-		if($('#art').check){selected.push("art");}
-		if($('#sport').check){selected.push("sport");}
-		if($('#ocean').check){selected.push("ocean");}
-		if($('#fishery').check){selected.push("fishery");}
-		if($('#welfare').check){selected.push("welfare");}
-		if($('#techlogy').check){selected.push("techlogy");}
-		if($('#health').check){selected.push("health");}
-		if($('#entertainment').check){selected.push("entertainment");}
+		if($('#learn').checked){selected.push("learn");}
+		if($('#art').checked){selected.push("art");}
+		if($('#sport').checked){selected.push("sport");}
+		if($('#ocean').checked){selected.push("ocean");}
+		if($('#fishery').checked){selected.push("fishery");}
+		if($('#welfare').checked){selected.push("welfare");}
+		if($('#techlogy').checked){selected.push("techlogy");}
+		if($('#health').checked){selected.push("health");}
+		if($('#entertainment').checked){selected.push("entertainment");}
 
 		$.ajax({
 		type: 'POST',
 		url: "http://"+ipconfig+"/searchcomplete",
-		data: {"type" : postType[postReg] , "data" : selected},
+		data: JSON.stringify({"type" : postType[postReg] , "data" : selected}),
 		contentType: 'application/json; charset=utf-8',
 		success: setResult
 		});
