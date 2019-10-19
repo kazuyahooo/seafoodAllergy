@@ -115,7 +115,7 @@ def allowed_file(filename):
 def complete():
     #activity_data是使用者輸入表單的資料    
     activity_data = request.values.to_dict()
-    insert_data(activity_data)
+    #insert_data(activity_data)
     print(activity_data)
     if 'event_photo' not in request.files:
         print('No file part')
@@ -128,7 +128,7 @@ def complete():
         elif file and allowed_file(file.filename):
             filename = secure_filename(file.filename)
             print(filename)
-            file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+            file.save(os.path.join(app.config['UPLOAD_FOLDER'], activity_data['eventNamw']))
     return render_template('postYourActivity.html',title='MyActivity', activity=activity_data)
 
 @app.route('/search', methods=['GET'])
@@ -141,7 +141,7 @@ def searchEvent():
     print(data)
     events=list()
     event={
-            'eventName' :'lovetony',
+            'eventName' :'gg123',
             'http':'http://www.google.tw',
             'eventB_M' : '2019:10:15',
             'eventLocation' : 'China Taipei',
@@ -163,4 +163,4 @@ def searchEvent():
 #    return '123'
 
 
-app.run(host="140.121.199.231",port="27018")
+app.run(host="127.0.0.1",port="27018")

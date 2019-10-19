@@ -11,7 +11,7 @@ function setResult(searchResult)
 			popContent +=
 				'<div class="flex-item box"><a href={{searchResult['+(i*3+j)+'].http}} style="text-decoration:none;" target="_blank">';
 			popContent +=
-				'<div class="image fit"><img src="searchResult['+(i*3+j)+'].img" alt="" /></div>';
+				'<div class="image fit"><img src="static/images/'+searchResult['+(i*3+j)+'].eventName+'.jpg" alt="" /></div>';
 			popContent +=
 				'<div class="content">'+
 				'<h3>'+searchResult[i*3+j].eventName+'</h3>'+
