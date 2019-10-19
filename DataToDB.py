@@ -190,7 +190,7 @@ def searchEvent():
 #                        'eventLocation' : event['evnetLocation'],
 #                        }
 #            events.append(temp_event)
-#        return jsonify(events)
+        return jsonify(events)
 #    data= request.get_json()
 #    print(data)
 #    events=list()
