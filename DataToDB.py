@@ -12,6 +12,7 @@ app.config["MONGODB_HOST"] = "mongodb+srv://Liao:871029@cluster0-sk2jk.mongodb.n
 app.config["MONGODB_DB"] = True
 app.config['SECRET_KEY'] = 'super-secret'
 app.config['SECURITY_PASSWORD_SALT'] = 'bcrypt'
+#app.config['SECURITY_LOGIN_USER_TEMPLATE']='security/login.html'
 app.jinja_env.auto_reload = True
 app.config['TEMPLATES_AUTO_RELOAD'] = True
 
@@ -71,10 +72,12 @@ def insert_data(event):
         print(col.find_one({"eventName":event["eventName"]}))
 
 @app.route('/')
+@login_required
 def login():
-    if current_user.is_authenticated:
-        return redirect('index.html')
-    return render_template('login.html')
+   # if current_user.is_authenticated:
+       # return redirect('index.html')
+   # return "123"
+   return render_template("index.html")
     
 
 @app.route('/index.html', methods=['GET'])
