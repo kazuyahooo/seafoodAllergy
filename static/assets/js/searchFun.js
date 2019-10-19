@@ -1,7 +1,23 @@
 //var searchResult;
 var postType = ["byName","byLocation","byType"];
 var postReg;
-var ipconfig = "140.121.199.231:27018"
+var ipconfig = "127.0.0.1:27018"
+
+
+function rederictEvent(name){
+	$.ajax({
+		type: 'POST',
+		url: "http://"+ipconfig+"/eventdetails",
+		data: JSON.stringify({"eventName" : name.toString()}),
+		contentType: 'application/json; charset=utf-8',
+		success: function(data, textStatus) {
+			if (data.redirect) {
+				// data.redirect contains the string URL to redirect to
+				window.location.href = data.redirect;
+			}
+		}
+	});
+}
 
 function setResult(searchResult)
 {
@@ -11,7 +27,8 @@ function setResult(searchResult)
 		popContent += '<div class="inner flex flex-3">';
 		for(var j=0;j<3 && i*3+j < searchResult.length;j++){
 			popContent +=
-				'<><div class="flex-item box"><a style="text-decoration:none;" target="_blank">';
+				'<form action="/eventdetails"  method="POST" enctype="multipart/form-data" name="form-search" id="form-search"><input type="hidden" name="eventName" value="'+searchResult[(i*3+j)].eventName+'">'+
+				'<div class="flex-item box" onClick="document.forms[\'form-search\'].submit();"><a style="text-decoration:none;" target="_blank">';
 			popContent +=
 				'<div class="image fit"><img src="static/images/'+searchResult[(i*3+j)].eventName+'.jpg" alt="" /></div>';
 			popContent +=
@@ -19,7 +36,7 @@ function setResult(searchResult)
 				'<h3>'+searchResult[i*3+j].eventName+'</h3>'+
 				'<p><b><span style="color:#AAAAAA;">活動時間 : '+searchResult[i*3+j].eventM_B+'</b></p>'+
 				'<p><b><span style="color:#AAAAAA;">活動地點 : '+searchResult[i*3+j].eventLocation+'</span></b></p>'+
-				'</a></div></div>';
+				'</div></a></div></form>';
 		}
 		popContent += '</div>';
 	}
