@@ -49,7 +49,7 @@
 						<form method=["POST"] action="/complete" enctype="multipart/form-data">					
 						<p>
 							<label> 活動名稱:
-								<h1>{{activity.eventName}}</h1>
+								<h1 id="theName">{{activity.eventName}}</h1>
 							</label>
 						</p>
 						<h2 id="content">封面宣傳照</h2>
@@ -60,7 +60,7 @@
 						<p><label> 結束時間:<h1>{{activity.eventM_F}}</h1></label></p>
 						
 						<h2 id="content">活動地點</h2>
-						<p><label> 活動地點:<h1>{{activity.eventLocation}}</h1></label></p>
+						<p><label> 活動地點:<h1 id="theLocation">{{activity.eventLocation}}</h1></label></p>
 						<span id="googleMap" onclick="createGoogleMap()"></span>
 
 						<h2 id="content">活動分類</h2>
@@ -155,23 +155,23 @@
 		<!-- Scripts -->
 		<script src="static/assets/js/jquery.min.js"></script>
 		<script>
-			function searchPhoto(){
+		$(document).ready(function(){
 			$('#eventPhoto').empty();
 			var popContent =			
 				"<img src='static/images/"+
-				activity.eventName+
+				$('#theName').text()+
 				".jpg'>";
 				$('#eventPhoto').append(popContent);
-			}
+			});
 			
-			function searchGoogleMap(){
+		$(document).ready(function(){
 			$('#googleMap').empty();
-			var popContent =			
+			var popContent_2 =			
 				"<iframe id='googleMap' width='100%' height='200' frameborder='0' scrolling='no' marginheight='0' marginwidth='0' src='https://maps.google.com.tw/maps?f=q&hl=zh-TW&geocode=&q="+
-				activity.eventLocation+
+				$('#theLocation').text()+
 				"&z=16&output=embed&t='></iframe>";
-				$('#googleMap').append(popContent);
-			}
+				$('#googleMap').append(popContent_2);
+			});
 		
 		</script>
 		<script src="static/assets/js/jquery.scrolly.min.js"></script>

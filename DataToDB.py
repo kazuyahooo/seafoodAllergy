@@ -206,18 +206,18 @@ def searchEvent():
             return jsonify(searchEvents)
         #3 Latest event 
         if data['type']=='recently':
+            print('here')
             lastupload = col.aggregate([{ "$sort": { "eventM_B": -1 } }])
             count = 0
-            for i in lastupload:
+            for match in lastupload:
                 count+=1
-                for match in lastupload:
-                    events={
-                        'eventName' :match['eventName'],
-                        'email':match['email_'],
-                        'eventM_B' : match['eventM_B'],
-                        'eventLocation' : match['eventLocation'],
-                    }
-                    print(events)
+                events={
+                    'eventName' :match['eventName'],
+                    'email':match['email_'],
+                    'eventM_B' : match['eventM_B'],
+                    'eventLocation' : match['eventLocation'],
+                }
+                print(events)
                 searchEvents.append(events)
                 if count == 3:
                     break
@@ -225,6 +225,7 @@ def searchEvent():
             
         # #3 earlist upload time
         if data['type']=='upLoadTime':
+            print('here')
             lastupload = col.find().skip(col.count() - 3)
             for match in lastupload:
                 events={
@@ -249,14 +250,14 @@ def showEvents():
     activity_data=col.find_one({"eventName":data["eventName"]})
     tempB=activity_data['eventM_B']
     tempF=activity_data['eventM_F']
-    print(tempB+'\n')
-    print(type(tempB))
-    tempB.replace("T"," ")
-    tempF.replace("T"," ")
-    print(tempB)
+    tempB=str(activity_data['eventM_B'])
+    tempF=str(activity_data['eventM_F'])
+    tempB=tempB.replace("T"," ")
+    tempF=tempF.replace("T"," ")
 
     activity_data['eventM_B']=tempB
     activity_data['eventM_F']=tempF
+    del activity_data["_id"]
     return render_template('events.html',activity= activity_data)
 
 @app.route('/index_Logined',methods=['GET','POST'])

@@ -49,12 +49,10 @@
 					<li><a id="#tab02">近期建立</a></li>
 				  </ul>
 				<div id="tab01" class="tab-inner">
-				<h1 style="font-size:50px; text-align:center;" >最新活動</h1>
-				<span id="latestEvent_1"></span>
+				<span id="latestEvent_1"></span></div>
 				
 				<div id="tab02" class="tab-inner">
-				<h1 style="font-size:50px;text-align:center;">近期建立</h1>
-				<span id="latestEvent_2"></span>
+				<span id="latestEvent_2"></span></div>
 				
 			</section>	
 			
@@ -121,12 +119,11 @@
 				
 				function setResult_1(searchResult){
 				$('#latestEvent_1').empty();
-				var popContent ;
+				var popContent='<h1 style="font-size:50px; text-align:center;" >最新活動</h1><div class="inner flex flex-3">';
 				for(var i=0;i<3;i++){
-					popContent += '<div class="inner flex flex-3">';
 						popContent +=
-							'<form action="/eventdetails"  method="POST" enctype="multipart/form-data" name="form-search" id="form-search"><input type="hidden" name="eventName" value="'+searchResult[i].eventName+'">'+
-							'<div class="flex-item box" onClick="document.forms[\'form-search\'].submit();"><a style="text-decoration:none;" target="_blank">';
+							'<form action="/eventdetails" class="flex-item box" method="POST" enctype="multipart/form-data" name="form-search" id="form-search"><input type="hidden" name="eventName" value="'+searchResult[i].eventName+'">'+
+							'<div  onClick="document.forms[\'form-search\'].submit();"><a style="text-decoration:none;" target="_blank">';
 						popContent +=
 							'<div class="image fit"><img src="static/images/'+searchResult[i].eventName+'.jpg" alt="" /></div>';
 						popContent +=
@@ -136,18 +133,17 @@
 							'<p><b><span style="color:#AAAAAA;">活動地點 : <br>'+searchResult[i].eventLocation+'</span></b></p>'+
 							'</div></a></div></form>';
 					}
-					popContent += '<div align="center"><b><a href="#" style="text-align:center;width:20%;font-size:23px;color:#25a2c3;text-decoration:none;"><br>SEE MORE</a></b></div></div>';
+					popContent += '</div><div align="center"><b><a href="#" style="text-align:center;width:20%;font-size:23px;color:#25a2c3;text-decoration:none;"><br>SEE MORE</a></b></div>';
 				$('#latestEvent_1').append(popContent);
 				}
 				
 				function setResult_2(searchResult){
 				$('#latestEvent_2').empty();
-				var popContent;
+				var popContent='<h1 style="font-size:50px; text-align:center;" >近期建立</h1><div class="inner flex flex-3">';
 				for(var i=0;i<3;i++){
-					popContent += '<div class="inner flex flex-3">';
 						popContent +=
-							'<form action="/eventdetails"  method="POST" enctype="multipart/form-data" name="form-search" id="form-search"><input type="hidden" name="eventName" value="'+searchResult[i].eventName+'">'+
-							'<div class="flex-item box" onClick="document.forms[\'form-search\'].submit();"><a style="text-decoration:none;" target="_blank">';
+							'<form action="/eventdetails" class="flex-item box" method="POST" enctype="multipart/form-data" name="form-search" id="form-search"> <input type="hidden" name="eventName" value="'+searchResult[i].eventName+'">'+
+							'<div onClick="document.forms[\'form-search\'].submit();"><a style="text-decoration:none;" target="_blank">';
 						popContent +=
 							'<div class="image fit"><img src="static/images/'+searchResult[i].eventName+'.jpg" alt="" /></div>';
 						popContent +=
@@ -157,11 +153,11 @@
 							'<p><b><span style="color:#AAAAAA;">活動地點 : <br>'+searchResult[i].eventLocation+'</span></b></p>'+
 							'</div></a></div></form>';
 					}
-					popContent += '<div align="center"><b><a href="#" style="text-align:center;width:20%;font-size:23px;color:#25a2c3;text-decoration:none;"><br>SEE MORE</a></b></div></div>';
+					popContent += '</div><div align="center"><b><a href="#" style="text-align:center;width:20%;font-size:23px;color:#25a2c3;text-decoration:none;"><br>SEE MORE</a></b></div>';
 				$('#latestEvent_2').append(popContent);
 				}
 				
-				var ipconfig = "127.0.0.1:5000";
+				var ipconfig = "140.121.199.231:27018";
 				$(document).ready(function(){
 						$.ajax({
 						type: 'POST',
