@@ -48,7 +48,7 @@ function setResult(searchResult)
 
 function searchRequest(){
 	var selected= [];
-	console.log($('#eventName').val());
+	//console.log($('#eventName').val());
 	if(postReg == 0){
 		$.ajax({
 		type: 'POST',
@@ -59,15 +59,15 @@ function searchRequest(){
 		});
 	}
 	if(postReg == 2){
-		if($('#learn').checked){selected.push("learn");}
-		if($('#art').checked){selected.push("art");}
-		if($('#sport').checked){selected.push("sport");}
-		if($('#ocean').checked){selected.push("ocean");}
-		if($('#fishery').checked){selected.push("fishery");}
-		if($('#welfare').checked){selected.push("welfare");}
-		if($('#techlogy').checked){selected.push("techlogy");}
-		if($('#health').checked){selected.push("health");}
-		if($('#entertainment').checked){selected.push("entertainment");}
+		if($('#learn').is(":checked")){selected.push("learn");}
+		if($('#art').is(":checked")){selected.push("art");}
+		if($('#sport').is(":checked")){selected.push("sport");}
+		if($('#ocean').is(":checked")){selected.push("ocean");}
+		if($('#fishery').is(":checked")){selected.push("fishery");}
+		if($('#welfare').is(":checked")){selected.push("welfare");}
+		if($('#techlogy').is(":checked")){selected.push("techlogy");}
+		if($('#health').is(":checked")){selected.push("health");}
+		if($('#entertainment').is(":checked")){selected.push("entertainment");}
 
 		$.ajax({
 		type: 'POST',

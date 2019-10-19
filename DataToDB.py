@@ -214,13 +214,10 @@ def searchEvent():
 def showEvents():
     data= request.values.to_dict()
     activity_data=col.find_one({"eventName":data["eventName"]})
-    tempB=activity_data['eventM_B']
-    tempF=activity_data['eventM_F']
-    print(tempB+'\n')
-    print(type(tempB))
-    tempB.replace("T"," ")
-    tempF.replace("T"," ")
-    print(tempB)
+    tempB=str(activity_data['eventM_B'])
+    tempF=str(activity_data['eventM_F'])
+    tempB=tempB.replace("T"," ")
+    tempF=tempF.replace("T"," ")
 
     activity_data['eventM_B']=tempB
     activity_data['eventM_F']=tempF
