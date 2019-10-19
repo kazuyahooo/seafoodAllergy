@@ -128,7 +128,7 @@ def complete():
         elif file and allowed_file(file.filename):
             filename = secure_filename(file.filename)
             print(filename)
-            file.save(os.path.join(app.config['UPLOAD_FOLDER'], activity_data['eventNamw']))
+            file.save(os.path.join(app.config['UPLOAD_FOLDER'], activity_data['eventName']))
     return render_template('postYourActivity.html',title='MyActivity', activity=activity_data)
 
 @app.route('/search', methods=['GET'])
@@ -163,4 +163,5 @@ def searchEvent():
 #    return '123'
 
 
-app.run(host="127.0.0.1",port="27018")
+app.run(host="140.121.199.231",port="27018")
+#127.0.0.1
