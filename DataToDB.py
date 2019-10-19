@@ -1,18 +1,23 @@
+import os
 import flask
-from flask import render_template, request, jsonify, redirect
+from flask import render_template, request, jsonify, redirect, url_for
 from flask_security import Security, MongoEngineUserDatastore, UserMixin, RoleMixin, login_required, current_user, roles_accepted
 from pymongo import MongoClient
 from flask_mongoengine import MongoEngine
+from werkzeug.utils import secure_filename
 
+UPLOAD_FOLDER = 'static/images'
+ALLOWED_EXTENSIONS = set(['txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'])
 
 app = flask.Flask(__name__)
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+
 app.config["DEBUG"] = True
 app.config["JSON_AS_ASCII"] = False
 app.config["MONGODB_HOST"] = "mongodb+srv://Liao:871029@cluster0-sk2jk.mongodb.net/flaskTest"
 app.config["MONGODB_DB"] = True
 app.config['SECRET_KEY'] = 'super-secret'
 app.config['SECURITY_PASSWORD_SALT'] = 'bcrypt'
-app.config['SECURITY_LOGIN_USER_TEMPLATE']='security/login.html'
 app.jinja_env.auto_reload = True
 app.config['TEMPLATES_AUTO_RELOAD'] = True
 
@@ -68,13 +73,14 @@ def insert_data(event):
     if col.find_one({"eventName":event["eventName"]}) is None:
         col.insert_one(event)
         print('insert success')
-    else:
-        print(col.find_one({"eventName":event["eventName"]}))
+    #else:
+        #print(col.find_one({"eventName":event["eventName"]}))
 
 @app.route('/')
-@login_required
 def login():
-   return render_template("index.html")
+    if current_user.is_authenticated:
+        return redirect('index.html')
+    return render_template('login.html')
     
 
 @app.route('/index.html', methods=['GET'])
@@ -101,12 +107,28 @@ def home():
 def element():
     return render_template("elements.html")
 
-@app.route('/complete', methods=['GET'])
+def allowed_file(filename):
+    return '.' in filename and \
+           filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+
+@app.route('/complete', methods=['GET','POST'])
 def complete():
     #activity_data是使用者輸入表單的資料    
     activity_data = request.values.to_dict()
     insert_data(activity_data)
     print(activity_data)
+    if 'event_photo' not in request.files:
+        print('No file part')
+    else:
+        file = request.files['event_photo']
+        # if user does not select file, browser also
+        # submit an empty part without filename
+        if file.filename == '':
+            print('No selected file')
+        elif file and allowed_file(file.filename):
+            filename = secure_filename(file.filename)
+            print(filename)
+            file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
     return render_template('postYourActivity.html',title='MyActivity', activity=activity_data)
 
 @app.route('/search', methods=['GET'])
@@ -141,4 +163,4 @@ def searchEvent():
 #    return '123'
 
 
-app.run(host="140.121.199.231",port="27018")
+app.run(host="127.0.0.1",port="27018")

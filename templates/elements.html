@@ -1,16 +1,10 @@
 <!DOCTYPE HTML>
-<!--
-	Intensify by TEMPLATED
-	templated.co @templatedco
-	Released for free under the Creative Commons Attribution 3.0 license (templated.co/license)
--->
 <html>
 	<head>
 		<title>建立活動</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<link rel="stylesheet" href="static/assets/css/main.css" />
-		<script src="static/assets/js/jquery.min.js"></script>
 	</head>
 	<body class="subpage">
 
@@ -52,30 +46,16 @@
 
 					<!-- Content -->
 					<h2 id="content">活動名稱</h2>
-						<form >					
+						<form action="/complete"  method="post" enctype="multipart/form-data">					
 						<p>
 							<label> 活動名稱:
 								<input type="text" name="eventName" id="eventName" placeholder="請輸入活動名稱" autofocus required="required">
 							</label>
 						</p>
-						
+						<h2 id="content">封面宣傳照</h2>
+						<input type="file" id="event_photo" name="event_photo" accept="image/jpg, image/jpeg, image/png"><br>
+						<img id="event_img" style="width:438px;height:219px;" src="static/images/ex_pic.jpg"  />
 						<h2 id="content">活動日期</h2>
-						<script>
-							var RightNow = new Date();
-							var M = addZero(RightNow.getMonth() + 1);
-							var d = addZero(RightNow.getDate());
-							var h = addZero(RightNow.getHours());
-							var m = addZero(RightNow.getMinutes());
-							function addZero(i) {
-							 if (i < 10) i = "0" + i;
-							  return i;
-							}
-							$(document).ready(function(){
-							$("#eventM_B").val(RightNow.getFullYear() + "-"+ M + "-" + d + "T" + h + ":" + m);});
-							$(document).ready(function(){
-							$("#eventM_F").val(RightNow.getFullYear() + "-"+ M + "-" + d + "T" + h + ":" + m);});
-						</script>
-
 						<p><label> 開始時間:<input name="eventM_B" id="eventM_B" type="datetime-local"  style="text-align:;"min="2019/01/01" required="required" value=""></label></p>
 						<p><label> 結束時間:<input name="eventM_F" id="eventM_F" type="datetime-local" style="text-align:justify;"min="2019/01/01"; required="required"></label></p>
 						
@@ -132,7 +112,6 @@
 							</div>		
 						</p>
 
-
 						<h2 id="content">活動詳情、說明</h2>
 						
 						<label> 活動詳情、說明:
@@ -140,7 +119,6 @@
 						</label>
 
 						<h2 id="content">活動規劃進度</h2>
-
 							<div>
 								<a href="javascript:;" onclick="document.getElementById('nec_hid').style.display='none'">
 									<input type="radio" id="Y" name="eventReady" value="Y" checked >
@@ -151,119 +129,38 @@
 							</div>
 
 							<div id="nec_hid" style="display: none"> <label >籌備所需
-								<textarea type="text" name="necessary" id="necessary" placeholder="請寫下籌備所需物品、備註" rows="6" required="required" ></textarea>
+								<textarea type="text" name="necessary" id="necessary" placeholder="請寫下籌備所需物品、備註" rows="6"  ></textarea>
 							</label></div>
 					<hr class="major" />
 
-								<!-- Form -->
-									<h1>活動聯絡人資訊</h1>
-									
-									
-										<div class="row uniform">
-											<div class="6u 12u$(xsmall)">
-												<input type="text" name="name_" id="name_" value="" placeholder="姓名" required="required"/>
-											</div>
-											<div class="6u$ 12u$(xsmall)">
-												<input type="email" name="email_" id="email_" value="" placeholder="電子郵件 Email" required="required"/>
-											</div>
-											<div class="6u 12u$(xsmall)">
-												<input type="text" name="phonenum_" id="phonenum_" placeholder="聯絡電話" required="required"/>
-											</div>
-											<div class="12u$">
-												<input type="text" name="address_" id="address_" placeholder="地址" required="required"/>
-											</div>
-
-										
-											<!-- Break -->
-											<!--<div class="4u 12u$(small)">
-												<input type="radio" id="priority-low" name="priority" checked>
-												<label for="priority-low">Low Priority</label>
-											</div>
-											<div class="4u 12u$(small)">
-												<input type="radio" id="priority-normal" name="priority">
-												<label for="priority-normal">Normal Priority</label>
-											</div>
-											<div class="4u$ 12u$(small)">
-												<input type="radio" id="priority-high" name="priority">
-												<label for="priority-high">High Priority</label>
-											</div>-->
-											<!-- Break -->
-											<!--<div class="6u 12u$(small)">
-												<input type="checkbox" id="copy" name="copy">
-												<label for="copy">Email me a copy of this message</label>
-											</div>
-											<div class="6u$ 12u$(small)">
-												<input type="checkbox" id="human" name="human" checked>
-												<label for="human">I am a human and not a robot</label>
-											</div>-->
-											<!-- Break -->
-											<div class="12u$">
-												<textarea name="remark" id="remark" placeholder="備註" rows="4" required="required"></textarea>
-											</div>
-											<!-- Break -->
-											<div class="12u$">
-												<ul class="actions">
-													<li><input type="submit" value="確認送出" /></li>
-													<li><input type="reset" value="取消" class="alt" /></li>
-												</ul>
-											</div>
-										</div>
-									</form>
-
-									<hr />
-
-									<!--<form method="post" action="#">
-										<div class="row uniform">
-											<div class="9u 12u$(small)">
-												<input type="text" name="query" id="query" value="" placeholder="Query" />
-											</div>
-											<div class="3u$ 12u$(small)">
-												<input type="submit" value="Search" class="fit" />
-											</div>
-										</div>
-									</form>-->
-
-								<!-- Image -->
-								<!--	<h3>Image</h3>
-
-									<h4>Fit</h4>
-									<span class="image fit"><img src="images/pic02.jpg" alt="" /></span>
-									<div class="box alt">
-										<div class="row 50% uniform">
-											<div class="4u"><span class="image fit"><img src="images/pic01.jpg" alt="" /></span></div>
-											<div class="4u"><span class="image fit"><img src="images/pic01.jpg" alt="" /></span></div>
-											<div class="4u$"><span class="image fit"><img src="images/pic01.jpg" alt="" /></span></div>-->
-											<!-- Break -->
-											<!--<div class="4u"><span class="image fit"><img src="images/pic01.jpg" alt="" /></span></div>
-											<div class="4u"><span class="image fit"><img src="images/pic01.jpg" alt="" /></span></div>
-											<div class="4u$"><span class="image fit"><img src="images/pic01.jpg" alt="" /></span></div>-->
-											<!-- Break -->
-											<!--<div class="4u"><span class="image fit"><img src="images/pic01.jpg" alt="" /></span></div>
-											<div class="4u"><span class="image fit"><img src="images/pic01.jpg" alt="" /></span></div>
-											<div class="4u$"><span class="image fit"><img src="images/pic01.jpg" alt="" /></span></div>
-										</div>
+						<!-- Form -->
+							<h1>活動聯絡人資訊</h1>
+								<div class="row uniform">
+									<div class="6u 12u$(xsmall)">
+										<input type="text" name="name_" id="name_" value="" placeholder="姓名" required="required"/>
 									</div>
-
-									<h4>Left &amp; Right</h4>
-									<p><span class="image left"><img src="images/pic01.jpg" alt="" /></span>Lorem ipsum dolor sit accumsan interdum nisi, quis tincidunt felis sagittis eget. tempus euismod. Vestibulum ante ipsum primis in faucibus vestibulum. Blandit adipiscing eu felis iaculis volutpat ac adipiscing accumsan eu faucibus. Integer ac pellentesque praesent tincidunt felis sagittis eget. tempus euismod. Vestibulum ante ipsum primis sagittis eget. tempus euismod. Vestibulum ante ipsum primis in faucibus vestibulum. Blandit adipiscing eu felis iaculis volutpat ac adipiscing accumsan eu faucibus. Integer ac pellentesque praesent tincidunt felis sagittis eget. tempus euismod. Vestibulum ante ipsum primis in faucibus vestibulum. Blandit adipiscing eu felis iaculis volutpat ac adipiscing accumsan eu faucibus. Integer ac pellentesque praesent. Vestibulum ante ipsum primis in faucibus magna blandit adipiscing eu felis iaculis volutpat lorem ipsum dolor sit amet dolor consequat.</p>
-									<p><span class="image right"><img src="images/pic01.jpg" alt="" /></span>Lorem ipsum dolor sit accumsan interdum nisi, quis tincidunt felis sagittis eget. tempus euismod. Vestibulum ante ipsum primis in faucibus vestibulum. Blandit adipiscing eu felis iaculis volutpat ac adipiscing accumsan eu faucibus. Integer ac pellentesque praesent tincidunt felis sagittis eget. tempus euismod. Vestibulum ante ipsum primis sagittis eget. tempus euismod. Vestibulum ante ipsum primis in faucibus vestibulum. Blandit adipiscing eu felis iaculis volutpat ac adipiscing accumsan eu faucibus. Integer ac pellentesque praesent tincidunt felis sagittis eget. tempus euismod. Vestibulum ante ipsum primis in faucibus vestibulum. Blandit adipiscing eu felis iaculis volutpat ac adipiscing accumsan eu faucibus. Integer ac pellentesque praesent. Vestibulum ante ipsum primis in faucibus magna blandit adipiscing eu felis iaculis volutpat lorem ipsum dolor sit amet dolor consequat.</p>-->
-
-								<!-- Preformatted Code -->
-									<!--	<h3>Preformatted</h3>
-									<pre><code>i = 0;
-
-while (!deck.isInOrder()) {
-    print 'Iteration ' + i;
-    deck.shuffle();
-    i++;
-}
-
-print 'It took ' + i + ' iterations to sort the deck.';
-</code></pre>-->
-
-							</div>
-						</div>
-
+									<div class="6u$ 12u$(xsmall)">
+										<input type="email" name="email_" id="email_" value="" placeholder="電子郵件 Email" required="required"/>
+									</div>
+									<div class="6u 12u$(xsmall)">
+										<input type="text" name="phonenum_" id="phonenum_" placeholder="聯絡電話" required="required"/>
+									</div>
+									<div class="12u$">
+										<input type="text" name="address_" id="address_" placeholder="地址" required="required"/>
+									</div>
+									<div class="12u$">
+										<textarea name="remark" id="remark" placeholder="備註" rows="4" required="required"></textarea>
+									</div>
+		
+									<div class="12u$">
+										<ul class="actions">
+											<li><input type="submit" value="確認送出" /></li>
+											<li><input type="reset" value="取消" class="alt" /></li>
+										</ul>
+									</div>
+								</div>
+						</form>
+					<hr/>
 				</div>
 			</section>
 
@@ -277,17 +174,42 @@ print 'It took ' + i + ' iterations to sort the deck.';
 						<li><span class="icon fa-map-marker"></span> 123 Somewhere Road, Nashville, TN 00000</li>
 					</ul>
 				</div>
-				<div class="copyright">
-					&copy; Untitled. Design <a href="https://templated.co">TEMPLATED</a>. Images <a href="https://unsplash.com">Unsplash</a>.
-				</div>
 			</footer>
 
 		<!-- Scripts -->
-			
-			<script src="static/assets/js/jquery.scrolly.min.js"></script>
-			<script src="static/assets/js/skel.min.js"></script>
-			<script src="static/assets/js/util.js"></script>
-			<script src="static/assets/js/main.js"></script>
-
+		<script src="static/assets/js/jquery.min.js"></script>
+		<script>
+			$("#event_photo").change(function(){
+			readURL(this);
+			});
+			function readURL(input){ 
+				if(input.files && input.files[0]){ 
+				var reader = new FileReader(); 
+				reader.onload = function (e) {
+				$("#event_img").attr('src', e.target.result); }
+				reader.readAsDataURL(input.files[0]);}
+			}
+			var RightNow = new Date();
+			var M = addZero(RightNow.getMonth() + 1);
+			var d = addZero(RightNow.getDate());
+			var h = addZero(RightNow.getHours());
+			var m = addZero(RightNow.getMinutes());
+		    function addZero(i) {
+		     if (i < 10) i = "0" + i;
+		      return i;
+		    }
+		    $(document).ready(function(){
+				$("#eventM_B").val(RightNow.getFullYear() + "-"+ M + "-" + d + "T" + h + ":" + m);});
+		    $(document).ready(function(){
+				$("#eventM_F").val(RightNow.getFullYear() + "-"+ M + "-" + d + "T" + h + ":" + m);});
+		</script>
+		
+		<script src="static/assets/js/jquery.scrolly.min.js"></script>
+		<script src="static/assets/js/skel.min.js"></script>
+		<script src="static/assets/js/util.js"></script>
+		<script src="static/assets/js/main.js"></script>
+		<script>
+		
 	</body>
+	
 </html>
