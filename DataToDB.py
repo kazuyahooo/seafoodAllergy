@@ -47,7 +47,7 @@ security = Security(app, user_datastore)
 
 #沒有權限導引畫面
 def unauthorized_callback():
-	return '沒有權限'
+	return redirect('/')
 
 # 設定未授權時轉跳畫面
 security._state.unauthorized_handler(unauthorized_callback)
@@ -123,6 +123,9 @@ def home():
     return render_template("index.html",event = temp_events)
 
 @app.route('/upLoadEvent')
+@login_required
+@roles_accepted('user','root')
+
 def element():
     return render_template("upLoadEvent.html")
 
