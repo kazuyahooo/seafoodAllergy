@@ -18,7 +18,7 @@ app.config["MONGODB_HOST"] = "mongodb+srv://Liao:871029@cluster0-sk2jk.mongodb.n
 app.config["MONGODB_DB"] = True
 app.config['SECRET_KEY'] = 'super-secret'
 app.config['SECURITY_PASSWORD_SALT'] = 'bcrypt'
-app.config['SECURITY_LOGIN_USER_TEMPLATE']='security/login.html'
+app.config['SECURITY_LOGIN_USER_TEMPLATE']='login.html'
 app.jinja_env.auto_reload = True
 app.config['TEMPLATES_AUTO_RELOAD'] = True
 
@@ -94,6 +94,7 @@ def login_Use():
     print(nowUser)
     userdb =client['flaskTest']
     user_col=userdb['user']
+    print(user_col.find_one({'email':nowUser['email']}))
     if user_col.find_one({'email':nowUser['email'],'password':nowUser['password']}) is None:
         return redirect('/login')
     nowUser=user_datastore.get_user(nowUser['email'])
