@@ -201,7 +201,7 @@ def searchEvent():
                     events={
                         'eventName' :match['eventName'],
                         'email':match['email_'],
-                        'eventM_B' : match['eventM_B'],
+                        'eventM_B' : match['eventM_B'].replace("T"," "),
                         'eventLocation' : match['eventLocation'],
                     }
                     print(events)
@@ -217,7 +217,7 @@ def searchEvent():
                 events={
                     'eventName' :match['eventName'],
                     'email':match['email_'],
-                    'eventM_B' : match['eventM_B'],
+                    'eventM_B' : match['eventM_B'].replace("T"," "),
                     'eventLocation' : match['eventLocation'],
                 }
                 print(events)
@@ -234,7 +234,7 @@ def searchEvent():
                 events={
                     'eventName' :match['eventName'],
                     'email':match['email_'],
-                    'eventM_B' : match['eventM_B'],
+                    'eventM_B' : match['eventM_B'].replace("T"," "),
                     'eventLocation' : match['eventLocation'],
                 }
                 print(events)
