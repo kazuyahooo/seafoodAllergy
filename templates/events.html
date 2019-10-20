@@ -13,7 +13,7 @@
 				<nav class="left">
 					<a href="#menu"><span>Menu</span></a>	
 				</nav>
-				<a href="upLoadEvent" class="logo">建立活動</a>
+				<a href="upLoadEvent" class="logo">已刊登活動</a>
 				<div id="nlogin">
 				<nav class="right" >
 					<a href="login" onclick="document.getElementById('alogin').style.display=''" class="button alt">登入</a>
@@ -35,94 +35,40 @@
 		<!-- Main -->
 			<section id="main" class="wrapper">
 				<div class="inner">
-					<header class="align-center">
-						<h1>活動</h1>
-						<p>在這，可以看到您所刊登的活動</p>
-					</header>
-
+					<form method=["POST"] action="/complete" enctype="multipart/form-data">			
 					<!-- Content -->
-					<h2 id="content">活動名稱</h2>
-						<form method=["POST"] action="/complete" enctype="multipart/form-data">					
-						<h4 id="theName">{{activity.eventName}}</h4>
+					<h2 id="content">活動名稱:&nbsp;&nbsp;<span style="color:#008F7E;" id="theName">{{activity.eventName}}</span></h2>
 						<h2 id="content">封面宣傳照</h2>
 						<span id="eventPhoto"></span>
 		
-						<h2 id="content">活動日期</h2>
-						<h4>{{activity.eventM_B}}~{{activity.eventM_F}}</h4>
+						<h2 id="content">活動日期:&nbsp;&nbsp;<span style="color:#008F7E;">{{activity.eventM_B}}~{{activity.eventM_F}}</span></h2>
 						
-						<h2 id="content">活動地點</h2>
-						<h4 id="theLocation">{{activity.eventLocation}}</h4>
+						<h2 id="content">活動地點:&nbsp;&nbsp;<span style="color:#008F7E;" id="theLocation">{{activity.eventLocation}}</h2>
 						<span id="googleMap" ></span>
 
-						<h2 id="content">活動分類</h2>
-						<p>
-							<div style="display: inline-block;">
-								<input type="checkbox" name="learn" id="learn" >
-								<label for="learn">學習</label>
-							</div>
-							<div style="display: inline-block;">
-								<input type="checkbox" name="art" id="art" >
-								<label for="art">藝文</label>
-							</div>
-							<div style="display: inline-block;">
-								<input type="checkbox" name="sport" id="sport" >
-								<label for="sport">運動</label>
-							</div>
-							<div style="display: inline-block;">
-								<input type="checkbox" name="ocean" id="ocean" >
-								<label for="ocean">海洋</label>
-							</div>
-							<div style="display: inline-block;">
-								<input type="checkbox" name="fishery" id="fishery" >
-								<label for="fishery">漁業</label>
-							</div>
-							<div style="display: inline-block;">
-								<input type="checkbox" name="welfare" id="welfare" >
-								<label for="welfare">公益</label>
-							</div>
-							<div style="display: inline-block;">
-								<input type="checkbox" name="techlogy" id="techlogy" >
-								<label for="techlogy">科技</label>
-							</div>
-							<div style="display: inline-block;">
-								<input type="checkbox" name="health" id="health" >
-								<label for="health">健康</label>
-							</div>
-							<div style="display: inline-block;">
-								<input type="checkbox" name="entertainment" id="entertainment" >
-								<label for="entertainment">娛樂</label>
-							</div>
-							<br>
-							<div id="otherclass">
-								其他&nbsp;&nbsp;<input style="width:20%;height:2.8em;" type="text" name="otherclass" id="otherclass">
-							</div>		
-						</p>
-
 						<h2 id="content">活動詳情、說明</h2>
-						
-						<h4>{{activity.eventDetail}}</h4>
+						<h2 style="color:#008F7E">{{activity.eventDetail}}</h2>
 
-						<h2 id="content">活動規劃進度</h2>
-						 <div>
+						<h2 id="content">活動規劃進度</h2> -->
+						<div>
 								<a href="javascript:;" onclick="document.getElementById('nec_hid').style.display='none'">
 									<input type="radio" id="Y" name="eventReady" value="Y" checked >
 									<label for="Y" style="font-size: 23px;">已籌畫完成</label></a>
 								<a href="javascript:;" onclick="document.getElementById('nec_hid').style.display=''">
 									<input type="radio" id="N" name="eventReady" value="N" >
 									<label for="N" style="font-size: 23px;">我仍在籌畫</label></a>
-									<h1>{{activity.eventReady}}!</h1>
-							</div>
-							<div id="nec_hid" style="display: none"> <label >籌備所需<h1>{{activity.necessary}}</h1></label></div>
+						</div> 
+						<div id="nec_hid" style="display: none"> <label >籌備所需<h2 style="color:#008F7E;">{{activity.necessary}}</h2></label></div>
 					<hr class="major" />
 
 						<!-- Form -->
 							<h1>活動聯絡人資訊</h1>
 								<div class="row uniform">
-									<div class="6u 12u$(xsmall)"><h4>{{activity.name}}</h4></div>
-									<div class="6u$ 12u$(xsmall)"><h4>{{activity.email}}</h4></div>
-									<div class="6u 12u$(xsmall)"><h4>{{activity.phonenum_}}</h4></div>
-									<div class="12u$"><h1>{{activity.address_}}</h1></div>
-									<div class="12u$"><h1>{{activity.remark}}</h1></div>
+									<div class="6u 12u$(xsmall)"><h2 style="color:#008F7E;">{{activity.name_}}</h2></div>
+									<div class="6u$ 12u$(xsmall)"><h2 style="color:#008F7E;">{{activity.email_}}</h2></div>
+									<div class="6u 12u$(xsmall)"><h2 style="color:#008F7E;">{{activity.phonenum_}}</h2></div>
+									<div class="12u$"><h2 style="color:#008F7E;">{{activity.address_}}</h2></div>
+									<div class="12u$"><h2 style="color:#008F7E;">{{activity.remark}}</h2></div>
 								</div>
 						</form>
 					<hr/>
@@ -148,9 +94,9 @@
 		$(document).ready(function(){
 			$('#eventPhoto').empty();
 			var popContent =			
-				"<img style='width:438px;height:219px;' src='static/images/"+
+				"<img style='width:1080px;height:540px;' src='static/images/"+
 				$('#theName').text()+
-				".jpg'>";
+				".jpg'><br>";
 				$('#eventPhoto').append(popContent);
 			});
 			
@@ -159,7 +105,7 @@
 			var popContent_2 =			
 				"<iframe id='googleMap' width='100%' height='200' frameborder='0' scrolling='no' marginheight='0' marginwidth='0' src='https://maps.google.com.tw/maps?f=q&hl=zh-TW&geocode=&q="+
 				$('#theLocation').text()+
-				"&z=16&output=embed&t='></iframe>";
+				"&z=16&output=embed&t='></iframe><br><br>";
 				$('#googleMap').append(popContent_2);
 			});
 		

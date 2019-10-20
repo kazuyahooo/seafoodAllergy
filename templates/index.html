@@ -97,14 +97,16 @@
 		<!-- Footer -->
 			<footer id="footer">
 				<div class="inner">
-					<h2>Get In Touch</h2>
+					<h2>Seafood Allergy</h2>
 					<ul class="actions">
 						<li><span class="icon fa-phone"></span> <a href="#">0965728008</a></li>
 						<li><span class="icon fa-envelope"></span> <a href="#">kaz749283@gmail.com</a></li>
 						<li><span class="icon fa-map-marker"></span> 123 Somewhere Road, Nashville, TN 00000</li>
 					</ul>
+					<p>Author:WEI WANG Hopeful LEE Wei KUANG CAPTAIN LIANG SHAN LEE </p>
 				</div>
 			</footer>
+
 
 		<!-- Scripts -->
 			<script src="static/assets/js/jquery.min.js"></script>
@@ -121,9 +123,9 @@
 				$('#latestEvent_1').empty();
 				var popContent='<h1 style="font-size:50px; text-align:center;" >最新活動</h1><div class="inner flex flex-3">';
 				for(var i=0;i<3;i++){
-						popContent +=
-							'<form action="/eventdetails" class="flex-item box" method="POST" enctype="multipart/form-data" name="form-search" id="form-search"><input type="hidden" name="eventName" value="'+searchResult[i].eventName+'">'+
-							'<div  onClick="document.forms[\'form-search\'].submit();"><a style="text-decoration:none;" target="_blank">';
+						popContent +=//enctype="multipart/form-data
+							'<form action="/eventdetails" class="flex-item box" method="GET" " name="form-search'+i+'" id="form-search'+i+'"><input type="hidden" name="eventName" value="'+searchResult[i].eventName+'">'+
+							'<div  onClick="document.forms[\'form-search'+i+'\'].submit();"><a style="text-decoration:none;" target="_blank">';
 						popContent +=
 							'<div class="image fit"><img src="static/images/'+searchResult[i].eventName+'.jpg" alt="" /></div>';
 						popContent +=
@@ -142,8 +144,8 @@
 				var popContent='<h1 style="font-size:50px; text-align:center;" >近期建立</h1><div class="inner flex flex-3">';
 				for(var i=0;i<3;i++){
 						popContent +=
-							'<form action="/eventdetails" class="flex-item box" method="POST" enctype="multipart/form-data" name="form-search" id="form-search"> <input type="hidden" name="eventName" value="'+searchResult[i].eventName+'">'+
-							'<div onClick="document.forms[\'form-search\'].submit();"><a style="text-decoration:none;" target="_blank">';
+							'<form action="/eventdetails" class="flex-item box" method="GET" name="form-search'+(i+3)+'" id="form-search'+(i+3)+'"> <input type="hidden" name="eventName" value="'+searchResult[i].eventName+'">'+
+							'<div onClick="document.forms[\'form-search'+(i+3)+'\'].submit();"><a style="text-decoration:none;" target="_blank">';
 						popContent +=
 							'<div class="image fit"><img src="static/images/'+searchResult[i].eventName+'.jpg" alt="" /></div>';
 						popContent +=
@@ -177,6 +179,7 @@
 						success: setResult_2
 						});
 				});
+				
 			</script>
 			<script src="static/assets/js/jquery.scrolly.min.js"></script>
 			<script src="static/assets/js/skel.min.js"></script>

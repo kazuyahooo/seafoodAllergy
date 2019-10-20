@@ -148,7 +148,7 @@ def complete():
             filename = secure_filename(file.filename)
             print(filename)
             file.save(os.path.join(app.config['UPLOAD_FOLDER'], activity_data['eventName']+".jpg"))
-    return render_template('postYourActivity.html',title='MyActivity', activity=activity_data)
+    return render_template('eventsBuild.html',title='MyActivity', activity=activity_data)
 
 @app.route('/search', methods=['GET'])
 def searchPage():
@@ -250,6 +250,7 @@ def searchEvent():
 @app.route('/eventdetails',methods=['GET','POST'])
 def showEvents():
     data= request.values.to_dict()
+    print(data)
     activity_data=col.find_one({"eventName":data["eventName"]})
     tempB=activity_data['eventM_B']
     tempF=activity_data['eventM_F']

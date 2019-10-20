@@ -28,8 +28,8 @@ function setResult(searchResult)
 		popContent += '<div class="inner flex flex-3">';
 		for(var j=0;j<3 && i*3+j < searchResult.length;j++){
 			popContent +=
-				'<form action="/eventdetails" class="flex-item box"  method="POST" enctype="multipart/form-data" name="form-search" id="form-search"><input type="hidden" name="eventName" value="'+searchResult[(i*3+j)].eventName+'">'+
-				'<div  onClick="document.forms[\'form-search\'].submit();"><a style="text-decoration:none;" target="_blank">';
+				'<form action="/eventdetails" class="flex-item box"  method="GET"  name="form-search'+(i*3+j)+'" id="form-search'+(i*3+j)+'"><input type="hidden" name="eventName" value="'+searchResult[(i*3+j)].eventName+'">'+
+				'<div  onClick="document.forms[\'form-search'+(i*3+j)+'\'].submit();"><a style="text-decoration:none;" target="_blank">';
 			popContent +=
 				'<div class="image fit"><img src="static/images/'+searchResult[(i*3+j)].eventName+'.jpg" alt="" /></div>';
 			popContent +=
