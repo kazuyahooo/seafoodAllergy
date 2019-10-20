@@ -92,7 +92,9 @@ def login():
 def login_Use():
     nowUser = request.values.to_dict()
     print(nowUser)
-    if user_datastore.get_user(nowUser['email']) is None:
+    userdb =client['flaskTest']
+    user_col=userdb['user']
+    if user_col.find_one({'email':nowUser['email'],'password':nowUser['password']}) is None:
         return redirect('/login')
     nowUser=user_datastore.get_user(nowUser['email'])
     login_user(nowUser)
