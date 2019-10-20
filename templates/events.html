@@ -40,8 +40,8 @@
 			<section id="main" class="wrapper">
 				<div class="inner">
 					<header class="align-center">
-						<h1>刊登活動</h1>
-						<p>在這，你可以刊登您所要舉行的活動</p>
+						<h1>活動</h1>
+						<p>在這，可以看到您所刊登的活動</p>
 					</header>
 
 					<!-- Content -->
@@ -53,7 +53,7 @@
 							</label>
 						</p>
 						<h2 id="content">封面宣傳照</h2>
-						<span id="eventPhoto" onclick="createPhoto()"></span>
+						<span id="eventPhoto"></span>
 		
 						<h2 id="content">活動日期</h2>
 						<p><label> 開始時間:<h1>{{activity.eventM_B}}</h1></label></p>
@@ -61,7 +61,7 @@
 						
 						<h2 id="content">活動地點</h2>
 						<p><label> 活動地點:<h1 id="theLocation">{{activity.eventLocation}}</h1></label></p>
-						<span id="googleMap" onclick="createGoogleMap()"></span>
+						<span id="googleMap" ></span>
 
 						<h2 id="content">活動分類</h2>
 						<p><label> 請勾選活動分類(可複選,至少一項)
@@ -158,7 +158,7 @@
 		$(document).ready(function(){
 			$('#eventPhoto').empty();
 			var popContent =			
-				"<img src='static/images/"+
+				"<img style="width:438px;height:219px;" src='static/images/"+
 				$('#theName').text()+
 				".jpg'>";
 				$('#eventPhoto').append(popContent);
